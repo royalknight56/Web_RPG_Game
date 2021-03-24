@@ -4,23 +4,23 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-23 11:00:41
+ * @LastEditTime: 2021-03-24 22:19:54
 -->
 <template>
-  <div ref="item_sel" class="item_outer">
+  <div @mouseleave="item_leave()" ref="item_sel" class="item_outer">
     <img
       draggable="false"
       class="item_img"
       width="60"
       height="60"
-      :src="peritem.src"
+      :src="peritem.src??'./wepon/default.png'"
       @mousemove="item_hover($event)"
       @mousedown="item_mousedown($event)"
     />
     <div v-if='peritem.ifEquip' class="item_if_equi">已装备</div>
     <div v-if="ifchose" class="item_ui">
       <div
-        v-for="(item, key) in peritem.tab"
+        v-for="(item, key) in itemtab"
         :key="key"
         @click.stop="chose(item)"
         class="item_ui_item"
@@ -56,6 +56,7 @@ import { defineProps, nextTick, reactive, ref, useContext } from "vue";
 import itemdesc from "./item_desc.vue";
 let props = defineProps({
   peritem: Object,
+  itemtab:Array
 });
 let item_sel = ref(null);
 let ifchose = ref(false);
@@ -70,7 +71,9 @@ function item_mousedown(e) {
   //物品被点击
   ifchose.value = !ifchose.value;
 }
-
+function item_leave(){
+  ifchose.value = false
+}
 function chose(item) {
   // console.log(item)
   item.fun?.(props.peritem);
@@ -97,14 +100,17 @@ function chose(item) {
   position: relative;
   background-color: black;
   color: aliceblue;
-  z-index: 1;
+  z-index: 2;
+  transform: translateY(-2px);
 }
+
 .item_ui_item:hover {
   background-color: rgba(255, 255, 255, 0.61);
 }
 .item_hover_ui {
   display: none;
   pointer-events: none;
+  z-index: 1;
 }
 
 .item_outer:hover .item_hover_ui {
@@ -113,7 +119,7 @@ function chose(item) {
   width: 140px;
   background-color: black;
   color: aliceblue;
-  z-index: 4;
+  z-index: 1;
 }
 
 .item_hover_ui_name {

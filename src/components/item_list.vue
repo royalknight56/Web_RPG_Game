@@ -11,7 +11,7 @@
     <div class="list_outer">
       <div class="list_item_outer">
         <div class="list_item" v-for="item in itemlist" :key="item">
-          <itemui :peritem='item'></itemui>
+          <itemui :itemtab='itemtab' :peritem='item'></itemui>
         </div>
       </div>
     </div>
@@ -22,7 +22,8 @@
 import { defineProps, reactive } from "vue";
 import itemui from "./item_ui.vue";
 defineProps({
-  itemlist: Array
+  itemlist: Array,
+  itemtab:Array
 })
 
 </script>

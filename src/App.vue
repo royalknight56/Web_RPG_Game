@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-21 11:11:43
+ * @LastEditTime: 2021-03-24 16:47:19
 -->
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
@@ -13,7 +13,7 @@
 
 <script setup>
 import {kvProvide} from './store/index'
-import kv from './store/kv'
+import kv from './store/global'
 import HelloWorld from './components/HelloWorld.vue'
 kvProvide(kv)
 

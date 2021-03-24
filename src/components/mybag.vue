@@ -4,14 +4,14 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-23 15:12:12
+ * @LastEditTime: 2021-03-24 22:20:41
 -->
 <template>
   <div>
     <div class="store_outer">
       <div class="store_title">背包</div>
       <div class="store_list">
-        <itemlistui :itemlist="itemlist"></itemlistui>
+        <itemlistui :itemtab='tab' :itemlist="bag"></itemlistui>
       </div>
     </div>
   </div>
@@ -22,14 +22,15 @@ import { defineProps, inject, reactive } from "vue";
 import itemlistui from "./item_list.vue";
 import equi from "../item/equi.js";
 let equimap = inject("equi");
-let tab = [
+let bag = inject("bag");
+let tab = reactive([
   {
     name: "丢弃",
     fun: function (self) {
       if(self.ifEquip){
         alert('请先卸下')
       }else{
-        itemlist.splice(itemlist.indexOf(self), 1);
+        bag.splice(bag.indexOf(self), 1);
       }
       
     },
@@ -56,12 +57,20 @@ let tab = [
       // itemlist.splice(itemlist.indexOf(self), 1);
     },
   },
-];
-let itemlist = reactive([
-  { ...equi.wuqi001, tab },
-  { ...equi.wuqi002, tab },
-  { ...equi.wuqi003, tab },
 ]);
+console.log(bag)
+bag.push({ ...equi.wuqi001 })
+  // ,
+  // { ...equi.wuqi002, tab },
+  // { ...equi.wuqi003, tab },
+  // { ...equi.shangyi001, tab },
+  // { ...equi.xiayi001, tab },
+  // { ...equi.xiezi001, tab },
+  // { ...equi.jiezhi001, tab },
+  // { ...equi.xianglian001, tab },
+  // { ...equi.shouzhuo001, tab },
+// ]);
+
 </script>
 
 <style scoped>

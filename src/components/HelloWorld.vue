@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-21 18:14:21
+ * @LastEditTime: 2021-03-24 15:44:48
 -->
 <template>
   <div class="main_layout">
@@ -12,6 +12,7 @@
     <mybag></mybag>
     <mypanel></mypanel>
     <myequi></myequi>
+    <fight></fight>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import store from "./shop.vue";
 import mybag from "./mybag.vue";
 import mypanel from "./role_panel.vue";
 import myequi from "./myequipment.vue";
+import fight from "./fight.vue"
 </script>
 
 <style scoped>

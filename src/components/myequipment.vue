@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-23 10:15:38
+ * @LastEditTime: 2021-03-24 15:11:13
 -->
 <template>
   <div>
@@ -40,19 +40,21 @@ let itemmap = inject('equi')
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 .equip_outer {
   position: relative;
   background-color: rgba(0, 0, 0, 0.205);
   width: 300px;
   height: 500px;
+  
 }
 .equip_list {
   position: absolute;
   top: 100px;
   width: 100%;
+  height: 400px;
+  overflow: auto;
+  overflow-x: hidden;
+  /* transform: scale(0.6); */
 }
 .equip_title {
   position: absolute;

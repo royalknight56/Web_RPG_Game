@@ -4,19 +4,35 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-23 10:53:14
+ * @LastEditTime: 2021-03-24 21:23:25
 -->
 <template>
   <div>
     <div class="panel_outer">
       <div class="panel_title">我的属性</div>
       <div class="panel_list_outer">
-        <div v-for="item in attr" :key="item" class="panel_attr">
+        <div class="panel_attr">
           <div class="panel_attr_key">
-            {{ item.name }}
+            HP
           </div>
           <div class="panel_attr_value">
-            {{ item.value }}
+            {{my.hp}}
+          </div>
+        </div>
+        <div class="panel_attr">
+          <div class="panel_attr_key">
+            MP
+          </div>
+          <div class="panel_attr_value">
+            {{my.mp}}
+          </div>
+        </div>
+        <div v-for="(item, key) in my.attr" :key="key" class="panel_attr">
+          <div class="panel_attr_key">
+            {{ attrs_key[key] }}
+          </div>
+          <div class="panel_attr_value">
+            {{ item }}
           </div>
         </div>
       </div>
@@ -27,43 +43,31 @@
 <script setup>
 import { computed, defineProps, inject, reactive } from "vue";
 
-// defineProps({
-//     attr:Object
-// })
 let equi = inject("equi");
-let myattatc = computed(() => {
-  let total = 0;
-  for (let pos in equi) {
-    console.log(equi[pos]?.attr?.attack);
-    total += equi[pos]?.attr?.attack ?? 0;
-  }
-  return total;
-});
+let my = inject("my");
 
-let attr = reactive({
-  attack: {
-    value: computed(() => {
-      let total = 0;
-      for (let pos in equi) {
-        console.log(equi[pos]?.attr?.attack);
-        total += equi[pos]?.attr?.attack ?? 0;
-      }
-      return total;
-    }),
-    name: "攻击力",
-  },
-  defense: {
-    value: computed(() => {
-      let total = 0;
-      for (let pos in equi) {
-        console.log(equi[pos]?.attr?.defend);
-        total += equi[pos]?.attr?.defend ?? 0;
-      }
-      return total;
-    }),
-    name: "防御",
-  },
-});
+let attrs_key = {
+  attack: "攻击力",
+  
+  defense: "防御力",
+  strength: "力量",
+  intelligence: "智力",
+  speed: "速度",
+};
+
+let attr = reactive({});
+for (let key in attrs_key) {
+  my.attr[key] = computed(() => {
+    let total = 0;
+    for (let pos in equi) {
+      total += equi[pos]?.attr?.[key] ?? 0;
+    }
+    total += my.baseAttr[key] ?? 0;
+    return total;
+  });
+}
+
+
 </script>
 
 <style scoped>
