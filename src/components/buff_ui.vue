@@ -2,40 +2,28 @@
  * @Descripttion: 
  * @version: 
  * @Author: RoyalKnight
- * @Date: 2021-03-20 21:29:34
+ * @Date: 2021-03-25 10:39:57
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 12:45:22
+ * @LastEditTime: 2021-03-25 11:05:05
 -->
 <template>
   <div @mouseleave="item_leave()" ref="item_sel" class="item_outer">
     <img
       draggable="false"
       class="item_img"
-      width="60"
-      height="60"
-      :src="peritem.src??'./wepon/default.png'"
+      width="16"
+      height="16"
+      :src="peritem.src ?? './wepon/default.png'"
       @mousemove="item_hover($event)"
       @mousedown="item_mousedown($event)"
     />
-    <div v-if='peritem.ifEquip' class="item_if_equi">已装备</div>
-    <div v-if='peritem.num' class="item_num">{{peritem.num}}</div>
-    <div v-if="ifchose" class="item_ui">
-      <div
-        v-for="(item, key) in itemtab"
-        :key="key"
-        @click.stop="chose(item)"
-        class="item_ui_item"
-      >
-        {{ item.name }}
-      </div>
-    </div>
+
     <div
       :style="{ left: item_hover_x + 'px', top: item_hover_y + 'px' }"
       class="item_hover_ui"
     >
       <div v-if="peritem.name" class="item_hover_ui_name">
         <itemdesc :desc="peritem.name"></itemdesc>
-        <!-- {{ peritem.name }} -->
       </div>
       <div v-if="peritem.desc">
         <div
@@ -44,7 +32,6 @@
           class="item_hover_ui_desc"
         >
           <itemdesc :desc="perdesc"></itemdesc>
-          <!-- {{ peritem.desc }} -->
         </div>
       </div>
     </div>
@@ -57,7 +44,6 @@ import { defineProps, nextTick, reactive, ref, useContext } from "vue";
 import itemdesc from "./item_desc.vue";
 let props = defineProps({
   peritem: Object,
-  itemtab:Array
 });
 let item_sel = ref(null);
 let ifchose = ref(false);
@@ -72,8 +58,8 @@ function item_mousedown(e) {
   //物品被点击
   ifchose.value = !ifchose.value;
 }
-function item_leave(){
-  ifchose.value = false
+function item_leave() {
+  ifchose.value = false;
 }
 function chose(item) {
   // console.log(item)
@@ -81,11 +67,11 @@ function chose(item) {
 }
 </script>
 
-<style>
+<style scoped>
 .item_outer {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 16px;
+  height: 16px;
   background-color: rgba(0, 0, 0, 0.185);
   border: 3px solid black;
   user-select: none;
@@ -94,6 +80,9 @@ function chose(item) {
   background-color: rgba(124, 124, 124, 0.171);
 }
 .item_img {
+  position: absolute;
+  left: 0;
+  top: 0;
   user-select: none;
   pointer-events: inherit;
 }
@@ -132,17 +121,10 @@ function chose(item) {
 .item_hover_ui_desc {
   padding: 4px;
 }
-.item_if_equi{
+.item_if_equi {
   position: absolute;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.281);
   color: white;
-}
-.item_num{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.616);
-  color: aliceblue;
 }
 </style>

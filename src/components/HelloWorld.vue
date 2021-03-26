@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-24 15:44:48
+ * @LastEditTime: 2021-03-26 09:10:21
 -->
 <template>
   <div class="main_layout">
@@ -13,6 +13,7 @@
     <mypanel></mypanel>
     <myequi></myequi>
     <fight></fight>
+    <fmap></fmap>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import mybag from "./mybag.vue";
 import mypanel from "./role_panel.vue";
 import myequi from "./myequipment.vue";
 import fight from "./fight.vue"
+import fmap from "./map.vue"
 </script>
 
 <style scoped>
