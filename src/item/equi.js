@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 21:00:22
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 18:42:16
+ * @LastEditTime: 2021-03-27 10:50:45
  */
 export default {
   default: {
@@ -19,7 +19,7 @@ export default {
     id: 'wuqi001',
     src: "./wepon/stick01_blod.png",
     name: "铁棍-/c900 血附魔/",
-    desc: ["攻击+ 80", "这个铁棍附带/c900 流血伤害/"],
+    desc: ["攻击+ /aattack ", "这个铁棍附带/c900 流血伤害/"],
     pos: 'wuqi',
     attr: {
       attack: 80,
@@ -47,10 +47,10 @@ export default {
     id: 'wuqi002',
     src: "./wepon/stick01_blod.png",
     name: "铁棍",
-    desc: ["攻击+ 20"],
+    desc: ["攻击+ /aattack "],
     equdesc: [
       '武器',
-      '攻击+/c111 20',
+      '攻击+/c111 /aattack ',
     ],
     pos: 'wuqi',
     attr: {
@@ -64,10 +64,10 @@ export default {
     id: 'wuqi003',
     src: "./wepon/stick01_blod.png",
     name: "铁棍-/c900 燃烧附魔/",
-    desc: ["攻击+ 230", "这个铁棍附带/c900 燃烧伤害/"],
+    desc: ["攻击+ /aattack ", "这个铁棍附带/c900 燃烧伤害/"],
     equdesc: [
       '武器',
-      '攻击+ 230',
+      '攻击+ /aattack ',
     ],
     pos: 'wuqi',
     attr: {
@@ -96,10 +96,10 @@ export default {
     id: 'shangyi001',
     src: "./wepon/shangyi001.png",
     name: "短袖",
-    desc: ["防御+ 20"],
+    desc: ["防御+ /adefense "],
     equdesc: [
       '上衣',
-      '防御+ 20',
+      '防御+ /adefense ',
     ],
     pos: 'shangyi',
     attr: {
@@ -110,10 +110,10 @@ export default {
     id: 'xiayi001',
     src: "./wepon/xiayi001.png",
     name: "短裤",
-    desc: ["防御+ 20"],
+    desc: ["防御+ /adefense "],
     equdesc: [
       '下衣',
-      '防御+/c111 20',
+      '防御+/c111 /adefense ',
     ],
     pos: 'xiayi',
     attr: {
@@ -124,11 +124,11 @@ export default {
     id: 'xiezi001',
     src: "./wepon/xiezi001.png",
     name: "鞋子",
-    desc: ["防御+ 20", "速度+ 20"],
+    desc: ["防御+ /adefense ", "速度+ /aspeed "],
     equdesc: [
       '鞋子',
-      '防御+ 20',
-      '速度+ 20',
+      '防御+ /adefense ',
+      '速度+ /aspeed ',
     ],
     pos: 'xiezi',
     attr: {
@@ -140,12 +140,12 @@ export default {
     id: 'jiezhi001',
     src: "./wepon/jiezhi001.png",
     name: "戒指",
-    desc: ["防御+ 20", "智力+ 30", '力量+30',],
+    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     equdesc: [
       '戒指',
-      '防御+ 20',
-      '智力+ 30',
-      '力量+ 30',
+      '防御+ /adefense ',
+      '智力+ /aintelligence ',
+      '力量+ /adefense ',
     ],
     pos: 'jiezhi',
     attr: {
@@ -158,12 +158,12 @@ export default {
     id: 'xianglian001',
     src: "./wepon/xianglian001.png",
     name: "项链",
-    desc: ["防御+ 20", "智力+ 20", '力量+ 20',],
+    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     equdesc: [
       '项链',
-      '防御+ 20',
-      '智力+ 20',
-      '力量+ 20',
+      '防御+ /adefense ',
+      '智力+ /aintelligence ',
+      '力量+ /adefense ',
     ],
     pos: 'xianglian',
     attr: {
@@ -176,12 +176,12 @@ export default {
     id: 'shouzhuo001',
     src: "./wepon/shouzhuo001.png",
     name: "手镯",
-    desc: ["防御+ 20", "智力+ 40", '力量+ 40',],
+    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     equdesc: [
       '手镯',
-      '防御+ 20',
-      '智力+ 40',
-      '力量+ 40',
+      '防御+ /adefense ',
+      '智力+ /aintelligence ',
+      '力量+ /adefense ',
     ],
     pos: 'shouzhuo',
     attr: {

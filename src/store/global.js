@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2020-12-07 15:55:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 18:17:51
+ * @LastEditTime: 2021-03-27 21:08:51
  */
 
 export default {
@@ -14,24 +14,24 @@ export default {
     spirit: 120,
     attr: {
     },
-    computedAttr:{
+    computedAttr: {
 
     },
     baseAttr: {
 
     },
     buff: {
-      du: {
-        beforeRound(self) {
-          self.attr.defense += 4000;
-        },
-        afterRound(self) {
-          self.attr.defense -= 4000;
-        },
-        numbers: 2,
-        desc: ['获得4000防御值'],
-        src: "./buff/buff_defend001.png"
-      }
+      // du: {
+      //   beforeRound(self) {
+      //     self.attr.defense += 4000;
+      //   },
+      //   afterRound(self) {
+      //     self.attr.defense -= 4000;
+      //   },
+      //   numbers: 2,
+      //   desc: ['获得4000防御值'],
+      //   src: "./buff/buff_defend001.png"
+      // }
     }
   },
   bag: [
@@ -40,8 +40,23 @@ export default {
   bag_goods: {
 
   },
+  log: {
+    list: [],
+    info: function (info,from) {
+      if(this.list.length>=40){
+        this.list.shift()
+      }
+      this.list.push({
+        text: info,
+        time: new Date(),
+        from:from
+      })
+    }
+  },
+
   enemymap: [
   ],
+
   equi: {
     wuqi: {
       id: 'default',

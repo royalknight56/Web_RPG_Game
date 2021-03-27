@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 18:40:18
+ * @LastEditTime: 2021-03-27 18:15:22
 -->
 <template>
   <div>
@@ -68,13 +68,11 @@ let tab = reactive([
   {
     name: "装备",
     fun: function (self) {
-      if (equimap[self.pos].pointer) {
-        equimap[self.pos].pointer.ifEquip = false;
+      if (equimap[self.pos]) {
+        equimap[self.pos].ifEquip = false;
       }
-      equimap[self.pos] = equi[self.id];
-      equimap[self.pos].pointer = self;
+      equimap[self.pos]=self;
       self.ifEquip = true;
-      // itemlist.splice(itemlist.indexOf(self), 1);
     },
   },
   {
@@ -82,20 +80,34 @@ let tab = reactive([
     fun: function (self) {
       equimap[self.pos].pointer.ifEquip = false;
       equimap[self.pos] = {};
-      // self.ifEquip=true
-      // itemlist.splice(itemlist.indexOf(self), 1);
+
     },
   },
+
+  {
+    name: "强化TEST",
+    fun: function (self) {
+      console.log(self)
+      self.attr.attack+=90;
+      // equimap[self.pos].pointer.ifEquip = false;
+      // equimap[self.pos] = {};
+
+    },
+  },
+
 ]);
 
 let goodstab = reactive([
 
   {
     name: "使用",
-    fun: function (self) {
+    fun: function (self) {//使用消耗品逻辑
       let ret = self.attr.use(global_my);
-      if(ret?.state == true){
+      if(ret?.state == true){//判断是否成功使用
         self.num--;
+      }
+      if(ret?.type == 'gain'){//判断是否获得了物品
+        addGoods(ret.id,ret.num)
       }
       if(self.num<=0){
         delete global_bag_goods[self.id]
@@ -127,6 +139,8 @@ addGoods('xueping001',3)
 addGoods('xueping001',2)
 addGoods('xueping002',2)
 addGoods('gongjiping001',2)
+addGoods('tiliyaoshui001',2)
+addGoods('superattack002',4)
 </script>
 
 <style scoped>

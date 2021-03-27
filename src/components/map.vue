@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-25 19:43:13
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 16:31:28
+ * @LastEditTime: 2021-03-27 21:32:56
 -->
 <template>
   <div>
@@ -37,6 +37,7 @@ import itembuff from "./buff_ui.vue";
 import enemylist from "../item/enemy.js";
 import fmap from "../item/fmap.js";
 import itemmap from "../item/equi.js";
+let sys_log = inject("log");
 
 function deepClone(obj) {
   //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
@@ -66,6 +67,13 @@ function mapTP(item) {
       enemymap.push(deepClone(enemylist[item.enemylist[i]]));
     }
     global_my.spirit -= item.spirit;
+
+    sys_log.info( `/c060 已经传送到 /c111 ${item.name}`,
+    "系统")
+
+  }else{
+    sys_log.info( "/c060 地图传送失败-没有体力",
+    "系统")
   }
 }
 </script>

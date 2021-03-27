@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-24 15:11:13
+ * @LastEditTime: 2021-03-27 10:42:16
 -->
 <template>
   <div>
@@ -19,7 +19,7 @@
               :key="perdesc"
               class="item_hover_ui_desc"
             >
-              <itemdesc :desc="perdesc"></itemdesc>
+              <itemdesc :item="item" :desc="perdesc"></itemdesc>
             </div>
           </div>
         </div>

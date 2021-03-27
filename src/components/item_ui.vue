@@ -4,17 +4,18 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 12:45:22
+ * @LastEditTime: 2021-03-27 21:38:42
 -->
 <template>
-  <div @mouseleave="item_leave()" ref="item_sel" class="item_outer">
+  <div @mouseleave="item_leave()"
+  @mousemove="item_hover($event)"
+   ref="item_sel" class="item_outer">
     <img
       draggable="false"
       class="item_img"
       width="60"
       height="60"
       :src="peritem.src??'./wepon/default.png'"
-      @mousemove="item_hover($event)"
       @mousedown="item_mousedown($event)"
     />
     <div v-if='peritem.ifEquip' class="item_if_equi">已装备</div>
@@ -43,7 +44,7 @@
           :key="perdesc"
           class="item_hover_ui_desc"
         >
-          <itemdesc :desc="perdesc"></itemdesc>
+          <itemdesc :item='peritem' :desc="perdesc"></itemdesc>
           <!-- {{ peritem.desc }} -->
         </div>
       </div>
