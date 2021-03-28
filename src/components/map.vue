@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-25 19:43:13
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-27 21:32:56
+ * @LastEditTime: 2021-03-28 16:57:56
 -->
 <template>
   <div>
@@ -62,6 +62,9 @@ function mapTP(item) {
   //地图传送FUN
   if (global_my.spirit - item.spirit >= 0) {
     //判断体力是否充足
+    //恢复血蓝
+    global_my.hp = global_my.maxhp;
+    global_my.mp = global_my.maxmp;
     enemymap.splice(0); //清空怪物列表
     for (let i = 0; i < item.enemylist.length; i++) {
       enemymap.push(deepClone(enemylist[item.enemylist[i]]));
@@ -80,10 +83,15 @@ function mapTP(item) {
 
 <style scoped>
 .fight_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
+  margin-left: -450px;
+  margin-top:  -250px;
+  z-index: 4;
 }
 .fight_list {
   position: absolute;
@@ -97,8 +105,8 @@ function mapTP(item) {
   position: absolute;
   top: 0;
   width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  font-size: 20px;
+  line-height: 50px;
   text-align: center;
 }
 .equip_outer {

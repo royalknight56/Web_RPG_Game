@@ -4,17 +4,21 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-25 10:39:57
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-25 11:05:05
+ * @LastEditTime: 2021-03-28 12:25:32
 -->
 <template>
-  <div @mouseleave="item_leave()" ref="item_sel" class="item_outer">
+  <div
+    @mouseleave="item_leave()"
+    @mousemove="item_hover($event)"
+    ref="item_sel"
+    class="item_outer"
+  >
     <img
       draggable="false"
       class="item_img"
       width="16"
       height="16"
       :src="peritem.src ?? './wepon/default.png'"
-      @mousemove="item_hover($event)"
       @mousedown="item_mousedown($event)"
     />
 
@@ -50,9 +54,14 @@ let ifchose = ref(false);
 let item_hover_x = ref(0);
 let item_hover_y = ref(0);
 function item_hover(e) {
-  // console.log(e)
-  item_hover_x.value = e.clientX;
-  item_hover_y.value = e.clientY;
+  if (e.clientX > window.innerWidth - 140) {
+    //判断是否靠近右边界
+    item_hover_x.value = e.clientX - 140;
+    item_hover_y.value = e.clientY;
+  } else {
+    item_hover_x.value = e.clientX;
+    item_hover_y.value = e.clientY;
+  }
 }
 function item_mousedown(e) {
   //物品被点击

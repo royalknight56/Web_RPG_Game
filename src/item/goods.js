@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-26 12:32:26
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 21:47:30
+ * @LastEditTime: 2021-03-28 20:11:26
  */
 export default {
   xueping001: {
@@ -115,6 +115,38 @@ export default {
             state: true,
             type: 'gain',
             id: 'superattack001',
+            num: 1
+          }
+        } else {
+          return {
+            state: true,
+          }
+        }
+
+      }
+    },
+  },
+
+  box001: {
+    id: 'box001',
+    src: "./goods/box001.png",
+    name: "未知的补给箱",
+    desc: ["有几率获得各种物品"],
+    attr: {
+      use(self) {
+        let rand = Math.random()
+        if (rand <= 0.1) {
+          return {
+            state: true,
+            type: 'gain',
+            id: 'superattack001',
+            num: 1
+          }
+        } else if (rand <= 0.5) {
+          return {
+            state: true,
+            type: 'gain',
+            id: 'tiliyaoshui001',
             num: 1
           }
         } else {

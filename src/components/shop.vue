@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:36:25
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-24 22:21:14
+ * @LastEditTime: 2021-03-28 16:58:35
 -->
 <template>
   <div>
@@ -39,14 +39,16 @@ let itemlist = reactive([
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 .store_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
+  margin-left: -450px;
+  margin-top:  -250px;
+  z-index: 3;
 }
 .store_list {
   position: absolute;
@@ -56,8 +58,8 @@ a {
   position: absolute;
   top: 0;
   width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  font-size: 20px;
+  line-height: 50px;
   text-align: center;
 }
 </style>

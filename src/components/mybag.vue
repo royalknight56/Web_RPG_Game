@@ -4,22 +4,23 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-27 18:15:22
+ * @LastEditTime: 2021-03-28 20:03:33
 -->
 <template>
-  <div>
-    <div class="store_outer">
-      <div class="store_title">背包</div>
-      <div class="store_tab">
-        <div @click="showBag=true"  class="store_tab_item">装备</div>
-        <div @click="showBag=false" class="store_tab_item">消耗品</div>
-      </div>
-      <div v-if="showBag" class="store_list">
-        <itemlistui :itemtab="tab" :itemlist="global_bag"></itemlistui>
-      </div>
-      <div v-if="!showBag" class="store_list">
-        <itemmapui :itemtab="goodstab" :itemlist="global_bag_goods"></itemmapui>
-      </div>
+  <div class="store_outer">
+    <div class="store_title">背包</div>
+    <div class="store_tab">
+      <div @click="showBag = true" :class="{chosen_store_tab_item:showBag}" class="store_tab_item">装备</div>
+      <div @click="showBag = false" :class="{chosen_store_tab_item:!showBag}" class="store_tab_item">消耗品</div>
+    </div>
+    <div v-if="showBag" class="store_list">
+      <itemlistui :itemtab="tab" :itemlist="global_bag.arr"></itemlistui>
+    </div>
+    <div v-if="!showBag" class="store_list">
+      <itemmapui
+        :itemtab="goodstab"
+        :itemlist="global_bag_goods.map"
+      ></itemmapui>
     </div>
   </div>
 </template>
@@ -51,8 +52,8 @@ function deepClone(obj) {
 let equimap = inject("equi");
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");
-let global_my = inject('my');
-let showBag = ref(true)
+let global_my = inject("my");
+let showBag = ref(true);
 
 let tab = reactive([
   {
@@ -61,7 +62,7 @@ let tab = reactive([
       if (self.ifEquip) {
         alert("请先卸下");
       } else {
-        global_bag.splice(global_bag.indexOf(self), 1);
+        global_bag.arr.splice(global_bag.arr.indexOf(self), 1);
       }
     },
   },
@@ -71,87 +72,61 @@ let tab = reactive([
       if (equimap[self.pos]) {
         equimap[self.pos].ifEquip = false;
       }
-      equimap[self.pos]=self;
+      equimap[self.pos] = self;
       self.ifEquip = true;
     },
   },
   {
     name: "卸下",
     fun: function (self) {
-      equimap[self.pos].pointer.ifEquip = false;
+      // equimap[self.pos].pointer.ifEquip = false;
+      self.ifEquip = false;
       equimap[self.pos] = {};
-
     },
   },
 
   {
     name: "强化TEST",
     fun: function (self) {
-      console.log(self)
-      self.attr.attack+=90;
-      // equimap[self.pos].pointer.ifEquip = false;
-      // equimap[self.pos] = {};
-
+      console.log(self);
+      self.attr.attack += 90;
     },
   },
-
 ]);
 
 let goodstab = reactive([
-
   {
     name: "使用",
-    fun: function (self) {//使用消耗品逻辑
+    fun: function (self) {
+      //使用消耗品逻辑
       let ret = self.attr.use(global_my);
-      if(ret?.state == true){//判断是否成功使用
+      if (ret?.state == true) {
+        //判断是否成功使用
         self.num--;
       }
-      if(ret?.type == 'gain'){//判断是否获得了物品
-        addGoods(ret.id,ret.num)
+      if (ret?.type == "gain") {
+        //判断是否获得了物品
+        global_bag_goods.addItems(ret.id, ret.num);
       }
-      if(self.num<=0){
-        delete global_bag_goods[self.id]
+      if (self.num <= 0) {
+        delete global_bag_goods.map[self.id];
       }
     },
   },
 ]);
-
-global_bag.push(deepClone(equi.wuqi001));
-global_bag.push(deepClone(equi.wuqi002));
-global_bag.push(deepClone(equi.wuqi003));
-global_bag.push(deepClone(equi.shangyi001));
-global_bag.push(deepClone(equi.xiayi001));
-global_bag.push(deepClone(equi.xiezi001));
-global_bag.push(deepClone(equi.jiezhi001));
-global_bag.push(deepClone(equi.xianglian001));
-global_bag.push(deepClone(equi.shouzhuo001));
-
-
-function addGoods(id,nums){
-  if(global_bag_goods[id]){
-    global_bag_goods[id].num+=nums
-  }else{
-    global_bag_goods[id]=deepClone(goods[id])
-    global_bag_goods[id].num = nums
-  }
-}
-addGoods('xueping001',3)
-addGoods('xueping001',2)
-addGoods('xueping002',2)
-addGoods('gongjiping001',2)
-addGoods('tiliyaoshui001',2)
-addGoods('superattack002',4)
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 .store_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
+  margin-left: -150px;
+  margin-top:  -250px;
+  z-index: 2;
 }
 .store_list {
   position: absolute;
@@ -161,15 +136,32 @@ a {
   position: absolute;
   top: 0;
   width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  font-size: 20px;
+  line-height: 50px;
   text-align: center;
 }
-.store_tab_item{
+.store_tab {
+  display: flex;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+.store_tab_item {
   position: relative;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
-  background-color: aqua;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+}
+.chosen_store_tab_item{
+  background-color: aliceblue;
+  color:  rgb(0, 0, 0);
+}
+.store_tab_item:hover {
+  background-color: aliceblue;
+  color:  rgb(0, 0, 0);
 }
 </style>

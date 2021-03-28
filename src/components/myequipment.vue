@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-27 10:42:16
+ * @LastEditTime: 2021-03-28 16:51:25
 -->
 <template>
   <div>
@@ -41,11 +41,15 @@ let itemmap = inject('equi')
 
 <style scoped>
 .equip_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  
+  margin-left: 150px;
+  margin-top:  -250px;
+  z-index: 0;
 }
 .equip_list {
   position: absolute;
@@ -60,8 +64,8 @@ let itemmap = inject('equi')
   position: absolute;
   top: 0;
   width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  font-size: 20px;
+  line-height: 50px;
   text-align: center;
 }
 .equip_item {

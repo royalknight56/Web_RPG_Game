@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 21:00:22
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-27 10:50:45
+ * @LastEditTime: 2021-03-28 19:59:50
  */
 export default {
   default: {
@@ -92,6 +92,26 @@ export default {
       },
     }
   },
+
+  yuren001: {
+    id: 'yuren001',
+    src: "./wepon/yuren001.png",
+    name: "羽刃",
+    desc: ["攻击+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
+    equdesc: [
+      '武器',
+      '防御+ /adefense ',
+      '智力+ /aintelligence ',
+      '力量+ /adefense ',
+    ],
+    pos: 'wuqi',
+    attr: {
+      defense: 20,
+      intelligence: 40,
+      strength: 40
+    },
+  },
+
   shangyi001: {
     id: 'shangyi001',
     src: "./wepon/shangyi001.png",

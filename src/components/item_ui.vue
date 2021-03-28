@@ -4,22 +4,25 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-27 21:38:42
+ * @LastEditTime: 2021-03-28 16:54:41
 -->
 <template>
-  <div @mouseleave="item_leave()"
-  @mousemove="item_hover($event)"
-   ref="item_sel" class="item_outer">
+  <div
+    @mouseleave="item_leave()"
+    @mousemove="item_hover($event)"
+    ref="item_sel"
+    class="item_outer"
+  >
     <img
       draggable="false"
       class="item_img"
       width="60"
       height="60"
-      :src="peritem.src??'./wepon/default.png'"
+      :src="peritem.src ?? './wepon/default.png'"
       @mousedown="item_mousedown($event)"
     />
-    <div v-if='peritem.ifEquip' class="item_if_equi">已装备</div>
-    <div v-if='peritem.num' class="item_num">{{peritem.num}}</div>
+    <div v-if="peritem.ifEquip" class="item_if_equi">已装备</div>
+    <div v-if="peritem.num" class="item_num">{{ peritem.num }}</div>
     <div v-if="ifchose" class="item_ui">
       <div
         v-for="(item, key) in itemtab"
@@ -44,7 +47,7 @@
           :key="perdesc"
           class="item_hover_ui_desc"
         >
-          <itemdesc :item='peritem' :desc="perdesc"></itemdesc>
+          <itemdesc :item="peritem" :desc="perdesc"></itemdesc>
           <!-- {{ peritem.desc }} -->
         </div>
       </div>
@@ -58,23 +61,27 @@ import { defineProps, nextTick, reactive, ref, useContext } from "vue";
 import itemdesc from "./item_desc.vue";
 let props = defineProps({
   peritem: Object,
-  itemtab:Array
+  itemtab: Array,
 });
 let item_sel = ref(null);
 let ifchose = ref(false);
 let item_hover_x = ref(0);
 let item_hover_y = ref(0);
 function item_hover(e) {
-  // console.log(e)
-  item_hover_x.value = e.clientX;
-  item_hover_y.value = e.clientY;
+  if (e.clientX > window.innerWidth - 140) {//判断是否靠近右边界
+    item_hover_x.value = e.clientX-140;
+    item_hover_y.value = e.clientY;
+  } else {
+    item_hover_x.value = e.clientX;
+    item_hover_y.value = e.clientY;
+  }
 }
 function item_mousedown(e) {
   //物品被点击
   ifchose.value = !ifchose.value;
 }
-function item_leave(){
-  ifchose.value = false
+function item_leave() {
+  ifchose.value = false;
 }
 function chose(item) {
   // console.log(item)
@@ -102,7 +109,7 @@ function chose(item) {
   position: relative;
   background-color: black;
   color: aliceblue;
-  z-index: 2;
+  z-index: 6;
   transform: translateY(-2px);
 }
 
@@ -110,9 +117,10 @@ function chose(item) {
   background-color: rgba(255, 255, 255, 0.61);
 }
 .item_hover_ui {
+  position: fixed;
   display: none;
   pointer-events: none;
-  z-index: 1;
+  z-index: 4;
 }
 
 .item_outer:hover .item_hover_ui {
@@ -121,7 +129,7 @@ function chose(item) {
   width: 140px;
   background-color: black;
   color: aliceblue;
-  z-index: 1;
+  z-index: 99999;
 }
 
 .item_hover_ui_name {
@@ -133,13 +141,13 @@ function chose(item) {
 .item_hover_ui_desc {
   padding: 4px;
 }
-.item_if_equi{
+.item_if_equi {
   position: absolute;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.281);
   color: white;
 }
-.item_num{
+.item_num {
   position: absolute;
   bottom: 0;
   left: 0;

@@ -4,27 +4,56 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 16:12:41
+ * @LastEditTime: 2021-03-28 20:54:26
 -->
 <template>
-  <div>
-    <div class="fight_outer">
-      <div class="fight_title" >战斗</div>
-      <div class="fight_list">
-        <div class="equip_item" v-for="item in enemymap" :key="item">
-          <itemui :peritem="item"></itemui>
-          <div class="fight_right">
-            <div class="fight_hp">{{ item.hp }}</div>
-            <div @click="fight(item)" class="fight_button">攻击</div>
-            <div class="buff_list">
-              <div
-                class="fight_buff"
-                v-for="perbuff in item.buff"
-                :key="perbuff"
-              >
-                <itembuff :peritem="perbuff"></itembuff>
-              </div>
-            </div>
+  <div class="fight_outer">
+    <div v-if="enemymap[0]" class="fight_ui">
+      <!-- <div class="equip_item" v-for="item in enemymap" :key="item"> -->
+      <itemui
+        class="fight_logo"
+        :peritem="enemymap[0]"
+        :key="enemymap[0]"
+      ></itemui>
+
+      <div class="fight_button_group">
+        <div @click="fight(enemymap[0])" class="fight_button">攻击</div>
+        <div
+          @click="fight(enemymap[0], item)"
+          v-for="item in skill"
+          :key="item"
+          class="fight_button"
+        >
+          {{ item.name }}
+        </div>
+        <!-- <div @click="fight(enemymap[0])" class="fight_button">技能1</div>
+          <div @click="fight(enemymap[0])" class="fight_button">技能2</div>
+          <div @click="fight(enemymap[0])" class="fight_button">技能3</div> -->
+      </div>
+      <div class="fight_right">
+        <div class="fight_hp">{{ enemymap[0].hp }}</div>
+        <div class="buff_list">
+          <div
+            class="fight_buff"
+            v-for="perbuff in enemymap[0].buff"
+            :key="perbuff"
+          >
+            <itembuff :peritem="perbuff"></itembuff>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fight_ani">
+      <img  :src="fightansrc">
+    </div>
+    <div class="fight_ui">
+      <div class="fight_right">
+        <div class="fight_my_hp">{{ my.hp }}</div>
+        <div class="fight_my_mp">{{ my.mp }}</div>
+
+        <div class="my_buff_list">
+          <div class="fight_my_buff" v-for="perbuff in my.buff" :key="perbuff">
+            <itembuff :peritem="perbuff"></itembuff>
           </div>
         </div>
       </div>
@@ -33,47 +62,24 @@
 </template>
 
 <script setup>
-import { defineProps, inject, onMounted, reactive, ref } from "vue";
+import { defineProps, inject, nextTick, onMounted, reactive, ref } from "vue";
 import itemui from "./item_ui.vue";
 import itemdesc from "./item_desc.vue";
 import itembuff from "./buff_ui.vue";
 import enemylist from "../item/enemy.js";
 import itemmap from "../item/equi.js";
-import goods from "../item/goods.js"
-
-function deepClone(obj) {
-  //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
-  var objClone = Array.isArray(obj) ? [] : {};
-  //进行深拷贝的不能为空，并且是对象或者是
-  if (obj && typeof obj === "object") {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (obj[key] && typeof obj[key] === "object") {
-          objClone[key] = deepClone(obj[key]);
-        } else {
-          objClone[key] = obj[key];
-        }
-      }
-    }
-  }
-  return objClone;
-}
-
-function addGoods(id,nums){//添加消耗品函数
-  if(global_bag_goods[id]){
-    global_bag_goods[id].num+=nums
-  }else{
-    global_bag_goods[id]=deepClone(goods[id])
-    global_bag_goods[id].num = nums
-  }
-}
-
+import goods from "../item/goods.js";
 
 let my = inject("my");
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");
 
 let equi = inject("equi");
+
+let skill = inject("skill");
+
+
+let fightansrc = ref('./fight/attack.gif')
 function attack(from, to) {
   let dam = Math.floor(
     (from.attr.attack * from.attr.attack) /
@@ -112,10 +118,10 @@ function checkDead(from) {
       //处理掉落物
       for (let i = 0; i < res.drop.length; i++) {
         if (res.drop[i].prob >= Math.random()) {
-          if(res.drop[i].type=='goods'){
-            addGoods(res.drop[i].id,res.drop[i]?.num??1)
-          }else {
-            global_bag.push({ ...itemmap[res.drop[i].id] });
+          if (res.drop[i].type == "goods") {
+            global_bag_goods.addItems(res.drop[i].id, res.drop[i]?.num ?? 1);
+          } else {
+            global_bag.addItems(res.drop[i].id);
           }
         }
       }
@@ -126,11 +132,20 @@ function checkDead(from) {
     }
   }
 }
-function fight(enemy) {
+function fight(enemy, skill) {
   beforeRound(enemy);
   beforeRound(my); //回合开始前,检查buff的beforeRound
 
-  attack(my, enemy);
+  if (skill && my.mp - skill.mp >= 0) {
+    //是否使用了技能和是否有蓝量使用技能
+    skill.use(my, enemy);
+    fightansrc.value=skill.ani+'?'+new Date().toString()
+    my.mp = my.mp - skill.mp;
+  } else {
+    fightansrc.value = './fight/attack.gif'+'?'+new Date().toString()
+    attack(my, enemy);
+  }
+
   attack(enemy, my); //伤害结算
 
   checkDead(enemy);
@@ -142,24 +157,43 @@ function fight(enemy) {
   equiAttackCheck(my, enemy);
 }
 
-let enemymap=inject('enemymap')
-
+let enemymap = inject("enemymap");
 </script>
 
 <style scoped>
 .fight_outer {
   position: relative;
   background-color: rgba(0, 0, 0, 0.205);
-  width: 300px;
-  height: 500px;
-}
-.fight_list {
-  position: absolute;
-  top: 100px;
   width: 100%;
-  height: 400px;
-  overflow: auto;
-  overflow-x: hidden;
+  height: 100%;
+}
+.fight_logo {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  animation: enemylogoan 1s;
+  /* margin-left: -30px; */
+}
+
+.fight_button_group {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.fight_button {
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: black;
+  color: aliceblue;
+}
+.fight_button:hover {
+  background-color: aliceblue;
+  color: black;
 }
 .fight_title {
   position: absolute;
@@ -169,44 +203,69 @@ let enemymap=inject('enemymap')
   line-height: 100px;
   text-align: center;
 }
-.equip_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
-  width: 300px;
-  height: 500px;
-}
-.equip_list {
-  position: absolute;
-  top: 100px;
-  width: 100%;
-  height: 400px;
-  overflow: auto;
-  overflow-x: hidden;
-  /* transform: scale(0.6); */
-}
-.equip_title {
+.fight_hp {
   position: absolute;
   top: 0;
-  width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  right: 0;
+
+  width: 400px;
+  height: 40px;
+  line-height: 40px;
+  background-color: rgb(160, 13, 13);
+  color: aliceblue;
   text-align: center;
 }
-.equip_item {
-  display: flex;
-  width: 100%;
-  border: 1px solid black;
-}
-.fight_button {
-  cursor: pointer;
-  width: 40px;
-  height: 20px;
-  background-color: black;
+.fight_my_hp {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 400px;
+  height: 40px;
+  line-height: 40px;
+  background-color: rgb(160, 13, 13);
   color: aliceblue;
+  text-align: center;
 }
-.fight_hp {
+.fight_my_mp {
+  position: absolute;
+  top: 40px;
+  left: 0;
+
+  width: 400px;
+  height: 20px;
+  line-height: 20px;
+  background-color: rgb(0, 41, 175);
+  color: aliceblue;
+  text-align: center;
+}
+.my_buff_list {
+  position: absolute;
+  top: 110px;
+  left: 0;
+  /* margin-left: -30px; */
+  display: flex;
 }
 .buff_list {
+  position: absolute;
+  top: 110px;
+  right: 0;
+  /* margin-left: -30px; */
   display: flex;
+}
+.fight_ani{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+</style>
+<style>
+@keyframes enemylogoan {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

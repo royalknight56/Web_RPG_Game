@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 18:28:23
+ * @LastEditTime: 2021-03-28 16:34:07
 -->
 <template>
   <div>
@@ -52,7 +52,7 @@
 <script setup>
 import { computed, defineProps, inject, reactive } from "vue";
 import itembuff from "./buff_ui.vue";
-let equi = inject("equi");
+// let equi = inject("equi");
 let my = inject("my");
 
 let attrs_key = {
@@ -63,35 +63,40 @@ let attrs_key = {
   intelligence: "智力",
   speed: "速度",
 };
-console.log(my.buff);
-let attr = reactive({});
-for (let key in attrs_key) {
+// for (let key in attrs_key) {
   
-  my.computedAttr[key] = computed(() => {
-    let total = 0;
-    for (let pos in equi) {
-      total += equi[pos]?.attr?.[key] ?? 0;
-    }
-    total += my.baseAttr[key] ?? 0;
-    my.attr[key] = total;
-    return total;
-  });
-}
+//   my.computedAttr[key] = computed(() => {
+//     let total = 0;
+//     for (let pos in equi) {
+//       total += equi[pos]?.attr?.[key] ?? 0;
+//     }
+//     total += my.baseAttr[key] ?? 0;
+//     my.attr[key] = total;
+//     return total;
+//   });
+// }
+
 </script>
 
 <style scoped>
 .panel_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
+  margin-left: -450px;
+  margin-top:  -250px;
+
 }
 .panel_title {
   position: absolute;
   top: 0;
   width: 100%;
-  font-size: 40px;
-  line-height: 100px;
+  font-size: 20px;
+  line-height: 50px;
   text-align: center;
 }
 .panel_list_outer {
