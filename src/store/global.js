@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2020-12-07 15:55:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 21:00:23
+ * @LastEditTime: 2021-03-29 18:17:59
  */
 import goods from "../item/goods.js";
 import equi from "../item/equi.js";
@@ -69,6 +69,43 @@ export default {
             (my.attr.attack + enemy.attr.defense + 1)
         );
         enemy.hp -= 2*dam;
+      }
+    },
+    skill02:{
+      id:'shengguang001',
+      name:'圣光',
+      mp:20,
+      desc:['获得圣光buff'],
+      ani:'./fight/shengguang001.gif',
+      use(my,enemy){
+
+        my.buff.shengguang_atk_001 = {
+          beforeRound(self) {
+            console.log('shengguang'+self.attr.attack)
+            self.attr.attack += 200;
+            console.log(self.attr)
+            console.log('shengguang'+self.attr.attack)
+          },
+          afterRound(self) {
+            self.attr.attack -= 200;
+          },
+          numbers: 3,
+          desc: ['攻击大幅提升'],
+          src: "./buff/buff_attack001.png"
+        }
+
+        my.buff.shengguang_def_001 = {
+          beforeRound(self) {
+            self.attr.defense += 50;
+          },
+          afterRound(self) {
+            self.attr.defense -= 50;
+          },
+          numbers: 3,
+          desc: ['防御提升'],
+          src: "./buff/buff_defend001.png"
+        }
+
       }
     }
   },

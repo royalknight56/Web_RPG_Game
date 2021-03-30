@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 20:54:26
+ * @LastEditTime: 2021-03-30 23:01:31
 -->
 <template>
   <div class="fight_outer">
@@ -133,8 +133,10 @@ function checkDead(from) {
   }
 }
 function fight(enemy, skill) {
+  //TODO:使用技能后获得的buff错误
   beforeRound(enemy);
   beforeRound(my); //回合开始前,检查buff的beforeRound
+
 
   if (skill && my.mp - skill.mp >= 0) {
     //是否使用了技能和是否有蓝量使用技能
@@ -153,6 +155,7 @@ function fight(enemy, skill) {
 
   afterRound(enemy);
   afterRound(my); //回合结束,检查buff的afterRound
+
 
   equiAttackCheck(my, enemy);
 }
