@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 10:51:28
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 20:11:43
+ * @LastEditTime: 2021-04-01 16:51:31
 -->
 <template>
   <div>
@@ -34,6 +34,8 @@ function saveMy(my) {
       maxhp: my.maxhp,
       maxmp: my.maxmp,
       spirit: my.spirit,
+      baseAttr: my.baseAttr,
+      exp: my.exp,
     })
   );
 }
@@ -44,6 +46,8 @@ function loadMy(my) {
   my.maxhp = myobj.maxhp;
   my.maxmp = myobj.maxmp;
   my.spirit = myobj.spirit;
+  my.exp = myobj.exp;
+  my.baseAttr = myobj.baseAttr;
 }
 
 function copyKey(funObj, attrObj) {
@@ -162,6 +166,9 @@ global_bag_goods.addItems("tiliyaoshui001", 2);
 global_bag_goods.addItems("superattack002", 4);
 global_bag_goods.addItems("box001", 20);
 
+//为my attr添加计算属性
+//computedAttr:面板属性
+//attr:生效属性
 let attrs_key = {
   attack: "攻击力",
 
@@ -174,10 +181,18 @@ for (let key in attrs_key) {
   global_my.computedAttr[key] = computed(() => {
     let total = 0;
     for (let pos in global_equi) {
+      //计算每个装备赋予的属性
       total += global_equi[pos]?.attr?.[key] ?? 0;
     }
-    total += global_my.baseAttr[key] ?? 0;
+
+    total += global_my.baseAttr[key] ?? 0; //加上基础属性
+
+    for (let name in global_my.buff) {
+      //计算buff赋予的属性,临时的
+      total += global_my.buff[name]?.attr?.[key] ?? 0;
+    }
     global_my.attr[key] = total;
+
     return total;
   });
 }

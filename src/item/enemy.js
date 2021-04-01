@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 20:35:11
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 16:06:24
+ * @LastEditTime: 2021-04-01 17:42:34
  */
 
 export default {
@@ -36,7 +36,8 @@ export default {
                             num:4
                         }
 
-                    ]
+                    ],
+                    exp:30,
                 }
             }
         },
@@ -82,7 +83,8 @@ export default {
                             num:4
                         }
 
-                    ]
+                    ],
+                    exp:30,
                 }
             }
         },

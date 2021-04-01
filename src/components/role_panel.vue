@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 16:34:07
+ * @LastEditTime: 2021-04-01 17:43:17
 -->
 <template>
   <div>
@@ -30,6 +30,14 @@
             {{ my.spirit }}
           </div>
         </div>
+
+        <div class="panel_attr">
+          <div class="panel_attr_key">经验</div>
+          <div class="panel_attr_value">
+            {{ my.exp }}
+          </div>
+        </div>
+
         <div v-for="(item, key) in my.computedAttr" :key="key" class="panel_attr" >
             <div class="panel_attr_key">
               {{ attrs_key[key] }}

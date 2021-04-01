@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2020-12-07 15:55:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-29 18:17:59
+ * @LastEditTime: 2021-04-01 16:48:00
  */
 import goods from "../item/goods.js";
 import equi from "../item/equi.js";
@@ -34,60 +34,66 @@ export default {
     mp: 100,
     maxmp: 100,
     spirit: 120,
+    exp:0,
     attr: {
     },
     computedAttr: {
 
     },
     baseAttr: {
-
+      attack: 0,
+      defense: 0,
+      strength: 0,
+      intelligence: 0,
+      speed: 0,
     },
     buff: {
-      // du: {
-      //   beforeRound(self) {
-      //     self.attr.defense += 4000;
-      //   },
-      //   afterRound(self) {
-      //     self.attr.defense -= 4000;
-      //   },
-      //   numbers: 2,
-      //   desc: ['获得4000防御值'],
-      //   src: "./buff/buff_defend001.png"
-      // }
+      du: {
+        attr: {
+          defense: 4000
+        },
+        beforeRound(self) {
+
+        },
+        afterRound(self) {
+
+        },
+        numbers: 2,
+        desc: ['获得4000防御值'],
+        src: "./buff/buff_defend001.png"
+      }
     }
   },
-  skill:{
-    skill01:{
-      id:'huoqiushu001',
-      name:'火球术',
-      mp:20,
-      desc:['造成2*ATK伤害'],
-      ani:'./fight/huoqiu001.gif',
-      use(my,enemy){
+  skill: {
+    skill01: {
+      id: 'huoqiushu001',
+      name: '火球术',
+      mp: 20,
+      desc: ['造成2*ATK伤害'],
+      ani: './fight/huoqiu001.gif',
+      use(my, enemy) {
         let dam = Math.floor(
           (my.attr.attack * my.attr.attack) /
-            (my.attr.attack + enemy.attr.defense + 1)
+          (my.attr.attack + enemy.attr.defense + 1)
         );
-        enemy.hp -= 2*dam;
+        enemy.hp -= 2 * dam;
       }
     },
-    skill02:{
-      id:'shengguang001',
-      name:'圣光',
-      mp:20,
-      desc:['获得圣光buff'],
-      ani:'./fight/shengguang001.gif',
-      use(my,enemy){
+    skill02: {
+      id: 'shengguang001',
+      name: '圣光',
+      mp: 20,
+      desc: ['获得圣光buff'],
+      ani: './fight/shengguang001.gif',
+      use(my, enemy) {
 
         my.buff.shengguang_atk_001 = {
+          attr: {
+            attack: 200,
+          },
           beforeRound(self) {
-            console.log('shengguang'+self.attr.attack)
-            self.attr.attack += 200;
-            console.log(self.attr)
-            console.log('shengguang'+self.attr.attack)
           },
           afterRound(self) {
-            self.attr.attack -= 200;
           },
           numbers: 3,
           desc: ['攻击大幅提升'],
@@ -95,11 +101,14 @@ export default {
         }
 
         my.buff.shengguang_def_001 = {
+          attr: {
+            defense: 50,
+          },
           beforeRound(self) {
-            self.attr.defense += 50;
+
           },
           afterRound(self) {
-            self.attr.defense -= 50;
+
           },
           numbers: 3,
           desc: ['防御提升'],
@@ -109,8 +118,8 @@ export default {
       }
     }
   },
-  bag:{
-    arr:[],
+  bag: {
+    arr: [],
     addItems: function (id) {
       this.arr.push(deepClone(equi[id]));
     }

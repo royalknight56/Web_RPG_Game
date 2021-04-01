@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-31 22:52:23
+ * @LastEditTime: 2021-04-01 16:56:02
 -->
 <template>
   <div class="fight_outer">
@@ -126,15 +126,21 @@ function checkDead(from) {
         }
       }
     }
+    if (res?.exp) {
+      //处理经验获得
+      my.exp+=res?.exp
+    }
     let ind = enemymap.indexOf(from);
     if (ind >= 0) {
       enemymap.splice(ind, 1);
     }
   }
 }
-function fight(enemy, skill) {
-  //TODO:使用技能后获得的buff错误
+function checkMyDead(my){
   
+}
+function fight(enemy, skill) {
+
   beforeRound(enemy);
   beforeRound(my); //回合开始前,检查buff的beforeRound
 
@@ -152,7 +158,7 @@ function fight(enemy, skill) {
   attack(enemy, my); //伤害结算
 
   checkDead(enemy);
-  checkDead(my); //检查死亡
+  checkMyDead(my); //检查死亡
 
   afterRound(enemy);
   afterRound(my); //回合结束,检查buff的afterRound
@@ -259,6 +265,7 @@ let enemymap = inject("enemymap");
 }
 .fight_ani{
   position: absolute;
+  user-select: none;
   left: 50%;
   top: 50%;
 }

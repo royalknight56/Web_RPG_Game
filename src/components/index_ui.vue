@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 16:41:38
+ * @LastEditTime: 2021-04-01 19:49:30
 -->
 <template>
   <div class="main_layout">
@@ -39,13 +39,7 @@
         >
           装备
         </div>
-        <div
-          @click="tabVisChange('fight')"
-          :class="{ chosen_index_ui_button: vis.fight }"
-          class="index_ui_button"
-        >
-          战斗
-        </div>
+
         <div
           @click="tabVisChange('fmap')"
           :class="{ chosen_index_ui_button: vis.fmap }"
@@ -110,8 +104,13 @@ function tabVisChange(tab) {
 
 <style scoped>
 .main_layout {
-  width: 100vw;
-  height: 100vh;
+  width: 1100px;
+  height: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -550px;
+  margin-top: -300px;
   overflow: hidden;
 }
 .main_flex {
@@ -121,16 +120,17 @@ function tabVisChange(tab) {
   height: 100%;
 }
 .index_ui_button_group {
-  width: 100vw;
+  width: 1100px;
   /* position: absolute; */
   bottom: 0;
   display: flex;
-  z-index: 2;
+  z-index: 6;
 }
 .index_ui_button {
+  background-image: url('../public/ui/UI-button001.png');
     position: relative;
   background-color: black;
-  color: white;
+  color: black;
   height: 40px;
   width: 100px;
   cursor: pointer;
@@ -139,11 +139,17 @@ function tabVisChange(tab) {
   user-select: none;
 }
 .chosen_index_ui_button {
+  background-image: url('../public/ui/UI-button002.png');
   background-color: white;
   color: black;
 }
 .index_ui_button:hover {
-  bottom: 3px;
+  background-image: url('../public/ui/UI-button003.png');
+  /* bottom: 3px; */
+}
+.chosen_index_ui_button:hover {
+  background-image: url('../public/ui/UI-button004.png');
+  /* bottom: 3px; */
 }
 .index_window {
   position: absolute;
