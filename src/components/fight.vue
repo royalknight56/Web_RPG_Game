@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-01 16:56:02
+ * @LastEditTime: 2021-04-02 20:50:14
 -->
 <template>
   <div class="fight_outer">
@@ -81,9 +81,12 @@ let skill = inject("skill");
 
 let fightansrc = ref('./fight/attack.gif')
 function attack(from, to) {
+  let atk = from.attr.attack;
+  let def = to.attr.defense;
+  
   let dam = Math.floor(
-    (from.attr.attack * from.attr.attack) /
-      (from.attr.attack + to.attr.defense + 1)
+    (atk * atk) /
+      (atk + def + 1)
   );
   to.hp -= dam;
 }
