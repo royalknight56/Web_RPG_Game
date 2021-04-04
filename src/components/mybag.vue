@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 20:03:33
+ * @LastEditTime: 2021-04-03 22:32:13
 -->
 <template>
   <div class="store_outer">
@@ -82,14 +82,6 @@ let tab = reactive([
       // equimap[self.pos].pointer.ifEquip = false;
       self.ifEquip = false;
       equimap[self.pos] = {};
-    },
-  },
-
-  {
-    name: "强化TEST",
-    fun: function (self) {
-      console.log(self);
-      self.attr.attack += 90;
     },
   },
 ]);

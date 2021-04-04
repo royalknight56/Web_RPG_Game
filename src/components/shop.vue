@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:36:25
  * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 16:58:35
+ * @LastEditTime: 2021-04-03 22:32:36
 -->
 <template>
   <div>
@@ -30,11 +30,7 @@ let tab = reactive([
   },
 ]);
 let itemlist = reactive([
-  { ...equi.wuqi001, tab },
-  { ...equi.wuqi002, tab },
-  { ...equi.wuqi003, tab },
-  { ...equi.shangyi001, tab },
-  { ...equi.xiayi001, tab },
+
 ]);
 </script>
 
