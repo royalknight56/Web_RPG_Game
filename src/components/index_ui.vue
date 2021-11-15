@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-03 21:50:34
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:55:00
 -->
 <template>
   <div class="main_layout">
@@ -25,15 +25,26 @@
     <syslog></syslog>
     <div class="index_window">
 
-      <store v-show="tabslist.store.show"></store>
+      <!-- <store v-show="tabslist.store.show"></store>
       <mybag v-show="tabslist.mybag.show"></mybag>
       <mypanel v-show="tabslist.mypanel.show"></mypanel>
-      <!-- 使用v-show使得计算属性被触摸 -->
       <myequi v-show="tabslist.myequi.show"></myequi>
 
       <fmap v-show="tabslist.fmap.show"></fmap>
       <setting  v-show="tabslist.setting.show"></setting>
-      <admintest v-show="tabslist.test.show"></admintest>
+      <admintest v-show="tabslist.test.show"></admintest> -->
+
+
+      <store v-show="vis.cur=='store'"></store>
+      <mybag v-show="vis.cur=='mybag'"></mybag>
+      <mypanel v-show="vis.cur=='mypanel'"></mypanel>
+      <!-- 使用v-show使得计算属性被触摸 -->
+      <myequi v-show="vis.cur=='myequi'"></myequi>
+
+      <fmap v-show="vis.cur=='fmap'"></fmap>
+      <setting  v-show="vis.cur=='setting'"></setting>
+      <admintest v-show="vis.cur=='test'"></admintest>
+
     </div>
   </div>
 </template>
@@ -41,15 +52,15 @@
 <script setup>
 import { defineProps, reactive } from "vue";
 // import imgsrc from '../assets/wepon/stick01.png'
-import store from "./shop.vue";
-import mybag from "./mybag.vue";
-import mypanel from "./role_panel.vue";
-import myequi from "./myequipment.vue";
+import store from "./panel/shop_panel.vue";
+import mybag from "./panel/mybag_panel.vue";
+import mypanel from "./panel/role_panel.vue";
+import myequi from "./panel/myequipment_panel.vue";
 import fight from "./fight.vue";
-import fmap from "./map.vue";
-import admintest from "./adminTest.vue";
+import fmap from "./panel/map_panel.vue";
+import admintest from "./panel/adminTest.vue";
 import syslog from "./sys_log.vue";
-import setting from "./setting.vue";
+import setting from "./panel/setting_panel.vue";
 
 let vis = reactive({
   store: false,
@@ -59,6 +70,7 @@ let vis = reactive({
   fmap: false,
   setting: false,
   test: false,
+  cur:""
 });
 let tabslist = reactive({
   store: {
@@ -92,12 +104,12 @@ let tabslist = reactive({
 });
 
 function tabVisChange(tab) {
-  tabslist[tab].show = !tabslist[tab].show;
-  //   if (vis.cur == tab) {
-  //     vis.cur = "";
-  //   } else {
-  //     vis.cur = tab;
-  //   }
+  // tabslist[tab].show = !tabslist[tab].show;
+    if (vis.cur == tab) {
+      vis.cur = "";
+    } else {
+      vis.cur = tab;
+    }
 }
 </script>
 

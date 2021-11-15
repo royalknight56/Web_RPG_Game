@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-01 17:43:17
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:59:42
 -->
 <template>
   <div>
@@ -59,7 +59,7 @@
 
 <script setup>
 import { computed, defineProps, inject, reactive } from "vue";
-import itembuff from "./buff_ui.vue";
+import itembuff from "../base/buff_ui.vue";
 // let equi = inject("equi");
 let my = inject("my");
 
@@ -95,7 +95,7 @@ let attrs_key = {
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: -450px;
+  /* margin-left: -450px; */
   margin-top:  -250px;
 
 }

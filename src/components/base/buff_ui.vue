@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-25 10:39:57
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 12:25:32
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:35:26
 -->
 <template>
   <div
@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { defineProps, nextTick, reactive, ref, useContext } from "vue";
+import { defineProps, nextTick, reactive, ref } from "vue";
 // import imgsrc from '../assets/wepon/stick01.png'
 import itemdesc from "./item_desc.vue";
 let props = defineProps({

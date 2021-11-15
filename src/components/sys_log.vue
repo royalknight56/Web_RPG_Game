@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-27 20:37:25
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 21:09:55
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:56:32
 -->
 <template>
   <div>
@@ -22,7 +22,7 @@
 
 <script setup>
 import { inject, ref } from "vue";
-import itemdesc from "./item_desc.vue";
+import itemdesc from "./base/item_desc.vue";
 let sys_log = inject("log");
 
 let ifshow = ref(true)

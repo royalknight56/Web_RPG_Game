@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-04-03 21:32:57
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-03 22:08:05
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:55:53
 -->
 <template>
   <div class="store_outer">
@@ -18,8 +18,8 @@
 
 <script setup>
 import { computed, inject } from "vue";
-import equi from "../item/equi.js";
-import goods from "../item/goods.js";
+import equi from "../../item/equi.js";
+import goods from "../../item/goods.js";
 let global_my = inject("my");
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");
@@ -149,7 +149,7 @@ function loadGame() {
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: -150px;
+  /* margin-left: -150px; */
   margin-top: -250px;
   z-index: 2;
 }

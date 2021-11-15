@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-27 10:51:28
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-03 22:10:08
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:56:50
 -->
 <template>
   <div>
@@ -14,8 +14,8 @@
 
 <script setup>
 import { computed, inject } from "vue";
-import equi from "../item/equi.js";
-import goods from "../item/goods.js";
+import equi from "../../item/equi.js";
+import goods from "../../item/goods.js";
 let global_my = inject("my");
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");

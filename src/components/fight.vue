@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-02 20:50:14
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:58:37
 -->
 <template>
   <div class="fight_outer">
@@ -63,9 +63,9 @@
 
 <script setup>
 import { defineProps, inject, nextTick, onMounted, reactive, ref } from "vue";
-import itemui from "./item_ui.vue";
-import itemdesc from "./item_desc.vue";
-import itembuff from "./buff_ui.vue";
+import itemui from "./base/item_ui.vue";
+import itemdesc from "./base/item_desc.vue";
+import itembuff from "./base/buff_ui.vue";
 import enemylist from "../item/enemy.js";
 import itemmap from "../item/equi.js";
 import goods from "../item/goods.js";

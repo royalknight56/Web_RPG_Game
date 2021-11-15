@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-03 22:32:13
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 16:00:05
 -->
 <template>
   <div class="store_outer">
@@ -27,10 +27,10 @@
 
 <script setup>
 import { defineProps, inject, reactive, ref } from "vue";
-import itemlistui from "./item_list.vue";
-import itemmapui from "./item_map.vue";
-import equi from "../item/equi.js";
-import goods from "../item/goods.js";
+import itemlistui from "../base/item_list.vue";
+import itemmapui from "../base/item_map.vue";
+import equi from "../../item/equi.js";
+import goods from "../../item/goods.js";
 function deepClone(obj) {
   //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
   var objClone = Array.isArray(obj) ? [] : {};
@@ -116,7 +116,7 @@ let goodstab = reactive([
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: -150px;
+  /* margin-left: -150px; */
   margin-top:  -250px;
   z-index: 2;
 }

@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-25 19:43:13
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 16:57:56
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:57:23
 -->
 <template>
   <div>
@@ -31,12 +31,12 @@
 
 <script setup>
 import { defineProps, inject, reactive } from "vue";
-import itemui from "./item_ui.vue";
-import itemdesc from "./item_desc.vue";
-import itembuff from "./buff_ui.vue";
-import enemylist from "../item/enemy.js";
-import fmap from "../item/fmap.js";
-import itemmap from "../item/equi.js";
+import itemui from "../base/item_ui.vue";
+import itemdesc from "../base/item_desc.vue";
+import itembuff from "../base/buff_ui.vue";
+import enemylist from "../../item/enemy.js";
+import fmap from "../../item/fmap.js";
+import itemmap from "../../item/equi.js";
 let sys_log = inject("log");
 
 function deepClone(obj) {
@@ -89,7 +89,7 @@ function mapTP(item) {
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: -450px;
+  /* margin-left: -450px; */
   margin-top:  -250px;
   z-index: 4;
 }

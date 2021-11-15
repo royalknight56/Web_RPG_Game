@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:36:25
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-03 22:32:36
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 16:00:23
 -->
 <template>
   <div>
@@ -19,8 +19,8 @@
 
 <script setup>
 import { defineProps, reactive } from "vue";
-import itemlistui from "./item_list.vue";
-import equi from "../item/equi.js";
+import itemlistui from "../base/item_list.vue";
+import equi from "../../item/equi.js";
 let tab = reactive([
   {
     name: "购买",
@@ -42,7 +42,7 @@ let itemlist = reactive([
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: -450px;
+  /* margin-left: -450px; */
   margin-top:  -250px;
   z-index: 3;
 }

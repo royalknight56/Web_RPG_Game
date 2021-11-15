@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 16:51:25
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 15:59:31
 -->
 <template>
   <div>
@@ -32,8 +32,8 @@
 <script setup>
 import { defineProps, inject, reactive } from "vue";
 // import itemlistui from "./item_list.vue";
-import itemui from "./item_ui.vue";
-import itemdesc from "./item_desc.vue";
+import itemui from "../base/item_ui.vue";
+import itemdesc from "../base/item_desc.vue";
 let itemmap = inject('equi')
 // let equi = inject('equi');
 // let itemlist = reactive();
@@ -47,7 +47,7 @@ let itemmap = inject('equi')
   background-color: rgb(151, 151, 151);
   width: 300px;
   height: 500px;
-  margin-left: 150px;
+  /* margin-left: 150px; */
   margin-top:  -250px;
   z-index: 0;
 }

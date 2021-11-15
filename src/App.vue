@@ -3,19 +3,22 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 09:58:36
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-15 16:13:01
 -->
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <indexUi />
+  <!-- <indexUi /> -->
+  <startUI></startUI>
+  
 </template>
 
 <script setup>
 import {kvProvide} from './store/index'
 import kv from './store/global'
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 import indexUi from './components/index_ui.vue'
+import startUI from "./components/start_ui.vue"
 kvProvide(kv)
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
