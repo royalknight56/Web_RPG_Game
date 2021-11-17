@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 10:51:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:03:21
+ * @LastEditTime: 2021-11-17 19:02:46
 -->
 <template>
   <div class="panel_outer ">
@@ -16,12 +16,10 @@
 import { computed, inject } from "vue";
 import equi from "../../item/equi.js";
 import goods from "../../item/goods.js";
-let global_my = inject("my");
+
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");
-let global_equi = inject("equi");
 let sys_log = inject("log");
-
 
 function logTest() {
   sys_log.info(
@@ -50,36 +48,7 @@ global_bag_goods.addItems("tiliyaoshui001", 2);
 global_bag_goods.addItems("superattack002", 4);
 global_bag_goods.addItems("box001", 20);
 
-//为my attr添加计算属性
-//computedAttr:面板属性
-//attr:生效属性
-let attrs_key = {
-  attack: "攻击力",
 
-  defense: "防御力",
-  strength: "力量",
-  intelligence: "智力",
-  speed: "速度",
-};
-for (let key in attrs_key) {
-  global_my.computedAttr[key] = computed(() => {
-    let total = 0;
-    for (let pos in global_equi) {
-      //计算每个装备赋予的属性
-      total += global_equi[pos]?.attr?.[key] ?? 0;
-    }
-
-    total += global_my.baseAttr[key] ?? 0; //加上基础属性
-
-    for (let name in global_my.buff) {
-      //计算buff赋予的属性,临时的
-      total += global_my.buff[name]?.attr?.[key] ?? 0;
-    }
-    global_my.attr[key] = total;
-
-    return total;
-  });
-}
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:02:22
+ * @LastEditTime: 2021-11-17 19:04:18
 -->
 <template>
   <div>
@@ -44,6 +44,9 @@
             </div>
             <div class="panel_attr_value">
               {{ item }}
+            </div>
+            <div class="panel_attr_value panel_attr_base_value">
+              ({{ my.baseAttr[key] }})
             </div>
         </div>
 

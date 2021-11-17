@@ -4,15 +4,15 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-16 11:01:57
+ * @LastEditTime: 2021-11-17 11:17:36
 -->
 <template>
   <div class="main_layout">
     <div class="main_flex">
       <div class="fight_outer">
         <fight v-if='global_sysStates.loc!="town"'></fight>
+        <first_townVue  v-if='global_sysStates.loc=="town"'></first_townVue>
       </div>
-      
       <div class="index_ui_button_group">
         <div
         v-for="(item,key) in tabslist"
@@ -64,6 +64,8 @@ import fmap from "./panel/map_panel.vue";
 import admintest from "./panel/adminTest.vue";
 import syslog from "./sys_log.vue";
 import setting from "./panel/setting_panel.vue";
+import first_townVue from "./town/first_town.vue";
+
 let global_sysStates = inject("sysStates");
 
 let vis = reactive({

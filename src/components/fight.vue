@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-16 11:11:32
+ * @LastEditTime: 2021-11-17 11:23:58
 -->
 <template>
   <div class="fight_outer">
@@ -166,6 +166,8 @@ function checkDead(from) {
   if (enemymap.length == 0) {
     global_sysStates.loc="town";
     console.log('清空地图')
+    my.hp = my.maxhp;
+    my.mp= my.maxmp;
     sys_log.info( `/c111 已经传送到城镇`,
     "系统")
   }
