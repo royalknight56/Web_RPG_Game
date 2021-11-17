@@ -4,13 +4,13 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 20:37:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:56:32
+ * @LastEditTime: 2021-11-15 20:00:43
 -->
 <template>
   <div>
     <div class="msg_outer" :class="{msg_hidden:!ifshow}">
       <div @click="vischange()" class="msg_title">系统消息</div>
-      <div v-show="ifshow" class="msg_list">
+      <div v-show="ifshow" class="msg_list" ref="msg_list">
         <div v-for="item in sys_log.list" :key="item" class="msg_item">
           <itemdesc class="msg_desc" :desc="`[${item.time.getHours()}:${item.time.getMinutes()}:${item.time.getSeconds()}] - [${item.from}] :`+item.text"></itemdesc>
           <!-- <itemdesc class="msg_desc" :desc="item.text"></itemdesc> -->
@@ -21,11 +21,20 @@
 </template>
 
 <script setup>
-import { inject, ref } from "vue";
+import { computed, inject, nextTick, ref, watch } from "vue";
 import itemdesc from "./base/item_desc.vue";
 let sys_log = inject("log");
 
+let msg_list = ref(null)
+
 let ifshow = ref(true)
+watch(sys_log.list,(msg)=>{
+  console.log('test')
+  nextTick(()=>{
+    msg_list.value.scrollTop=msg_list.value.scrollHeight
+  })
+  
+})
 function vischange(){
 ifshow.value=!ifshow.value
 }
@@ -36,15 +45,16 @@ a {
 }
 .msg_outer {
   position: absolute;
-  bottom: 0;
+  bottom: 120px;
   background-color: rgba(0, 0, 0, 0.205);
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .msg_hidden{
-  height: 60px;
+  height: 20px;
 }
 .msg_title {
   position: absolute;
@@ -59,7 +69,8 @@ a {
   position: absolute;
   top: 15px;
   width: 100%;
-  height: 240px;
+  height: 80px;
+  font-size: 12px;
   overflow: auto;
 }
 .msg_item {

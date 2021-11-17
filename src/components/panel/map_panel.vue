@@ -4,11 +4,11 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-25 19:43:13
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:57:23
+ * @LastEditTime: 2021-11-16 11:00:08
 -->
 <template>
   <div>
-    <div class="fight_outer">
+    <div class="panel_outer">
       <div class="fight_title">地图</div>
       <div class="fight_list">
         <div class="equip_item" v-for="item in fmap" :key="item">
@@ -38,6 +38,7 @@ import enemylist from "../../item/enemy.js";
 import fmap from "../../item/fmap.js";
 import itemmap from "../../item/equi.js";
 let sys_log = inject("log");
+let global_sysStates = inject("sysStates")
 
 function deepClone(obj) {
   //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
@@ -70,8 +71,8 @@ function mapTP(item) {
       enemymap.push(deepClone(enemylist[item.enemylist[i]]));
     }
     global_my.spirit -= item.spirit;
-
-    sys_log.info( `/c060 已经传送到 /c111 ${item.name}`,
+    global_sysStates.loc=item.id
+    sys_log.info( `/c111 已经传送到 /c060 ${item.name}`,
     "系统")
 
   }else{
@@ -82,6 +83,7 @@ function mapTP(item) {
 </script>
 
 <style scoped>
+@import './panel.css';
 .fight_outer {
   position: fixed;
   left: 50%;

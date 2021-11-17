@@ -4,12 +4,12 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 16:13:01
+ * @LastEditTime: 2021-11-15 17:54:34
 -->
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <indexUi /> -->
-  <startUI></startUI>
+  <indexUi v-show="states=='start'" />
+  <StartUI v-if="states=='ready'" @action="actionFun"></StartUI>
   
 </template>
 
@@ -18,9 +18,30 @@ import {kvProvide} from './store/index'
 import kv from './store/global'
 // import HelloWorld from './components/HelloWorld.vue'
 import indexUi from './components/index_ui.vue'
-import startUI from "./components/start_ui.vue"
+import StartUI from "./components/start_ui.vue"
+import { ref } from '@vue/reactivity'
+import {loadGame} from "./libs/games/game_load.js"
+import {inject} from "vue"
+
 kvProvide(kv)
 
+
+let global_my = kv.my;
+let global_bag = kv.bag;
+let global_bag_goods =kv.bag_goods;
+let global_equi = kv.equi;
+let sys_log = kv.log;
+
+let states = ref('start')
+
+function actionFun(msg){
+	// console.log(msg)
+	if(msg=='start'){
+		states.value='start'
+	}else if(msg=='load'){
+		loadGame(global_my,global_bag,global_bag_goods,sys_log,global_equi)
+	}
+}
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
 </script>

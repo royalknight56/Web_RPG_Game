@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:59:42
+ * @LastEditTime: 2021-11-15 19:02:22
 -->
 <template>
   <div>
@@ -87,18 +87,8 @@ let attrs_key = {
 </script>
 
 <style scoped>
-.panel_outer {
+@import './panel.css';
 
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: rgb(151, 151, 151);
-  width: 300px;
-  height: 500px;
-  /* margin-left: -450px; */
-  margin-top:  -250px;
-
-}
 .panel_title {
   position: absolute;
   top: 0;

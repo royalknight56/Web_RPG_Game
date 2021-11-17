@@ -1,6 +1,6 @@
 <!--
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2021-11-15 16:15:28
+ * @LastEditTime: 2021-11-15 17:20:49
  * @Description: 
 -->
 <template>
@@ -8,7 +8,7 @@
   <div class="start_ui">
     <div class="start_ui_title">
       <h1>欢迎来到我的世界</h1>
-      <h2>请选择你的角色</h2>
+      <!-- <h2>请选择你的角色</h2> -->
     </div>
     <div class="start_ui_content">
       <div
@@ -17,15 +17,15 @@
         :key="index"
       >
         <div class="start_ui_content_item_img">
-          <img :src="item.img" alt="" />
+          <!-- <img :src="item.img" alt="" /> -->
         </div>
         <div class="start_ui_content_item_name">
-          <h1>{{ item.name }}</h1>
+          <!-- <h1>{{ item.name }}</h1> -->
           <h2>{{ item.desc }}</h2>
         </div>
         <div class="start_ui_content_item_btn">
-          <button @click="start_ui_content_item_btn_click(index)">
-            开始游戏
+          <button @click="start_ui_content_item_btn_click(item)">
+            {{ item.name }}
           </button>
         </div>
       </div>
@@ -33,13 +33,41 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { defineEmits } from "vue";
+const emit = defineEmits(["action"]);
+
+let start_ui_content_item = [
+  {
+    name: "开始游戏",
+    desc: "开始一个全新的游戏",
+    img: "./img/player1.png",
+    action:"start"
+  },
+
+  {
+    name: "加载存档",
+    desc: "这是玩家2的描述",
+    img: "./img/player2.png",
+    action:"load"
+  },
+  {
+    name: "退出",
+    desc: "这是玩家3的描述",
+    img: "./img/player3.png",
+    action:"quit"
+  },
+];
+
+function start_ui_content_item_btn_click(item) {
+  // 开始游戏
+  emit("action",item.action);
+}
 </script>
 
 <style>
 .start_ui {
-    width: 1100px;
+  width: 1100px;
   height: 600px;
   position: absolute;
   left: 50%;
@@ -136,6 +164,4 @@ export default {};
   border: none;
   border-radius: 5px;
 }
-
-
 </style>

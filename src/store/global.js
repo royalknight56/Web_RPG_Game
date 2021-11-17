@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2020-12-07 15:55:59
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-01 16:48:00
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-16 10:50:53
  */
 import goods from "../item/goods.js";
 import equi from "../item/equi.js";
@@ -28,6 +28,9 @@ function deepClone(obj) {
 }
 
 export default {
+  sysStates:{
+    loc:'town'
+  },
   my: {
     hp: 100,
     maxhp: 100,

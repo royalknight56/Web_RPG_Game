@@ -1,30 +1,11 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: RoyalKnight
- * @Date: 2021-04-03 21:32:57
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:02:27
--->
-<template>
-  <div class="panel_outer">
-    <div class="store_title">系统设置</div>
-    <div class="button_group">
-      <div class="store_button" @click="saveGame()">保存</div>
-      <div class="store_button" @click="loadGame()">加载</div>
-    </div>
-  </div>
-</template>
 
-<script setup>
-import { computed, inject } from "vue";
 import equi from "../../item/equi.js";
 import goods from "../../item/goods.js";
-let global_my = inject("my");
-let global_bag = inject("bag");
-let global_bag_goods = inject("bag_goods");
-let global_equi = inject("equi");
-let sys_log = inject("log");
+// let global_my = inject("my");
+// let global_bag = inject("bag");
+// let global_bag_goods = inject("bag_goods");
+// let global_equi = inject("equi");
+// let sys_log = inject("log");
 
 function saveMy(my) {
   localStorage.setItem(
@@ -96,7 +77,7 @@ function saveBag(bag) {
     })
   );
 }
-function loadBag(bag) {
+function loadBag(bag,global_equi) {
   let bagTemp = JSON.parse(localStorage.getItem("bag"));
   let bagArr = bagTemp.bag;
   for (let i = 0; i < bagArr.length; i++) {
@@ -125,72 +106,21 @@ function loadBag_goods(bag_goods) {
     bag_goods[key] = copyKey(funObj, attrObj);
   }
 }
-function saveGame() {
+function saveGame(global_my,global_bag,global_bag_goods,sys_log) {
   saveMy(global_my);
   sys_log.info("/c060 状态保存成功", "Sys");
   saveBag(global_bag.arr);
   saveBag_goods(global_bag_goods.map);
   sys_log.info("/c060 背包保存成功", "Sys");
 }
-function loadGame() {
+function loadGame(global_my,global_bag,global_bag_goods,sys_log,global_equi) {
   loadMy(global_my);
   sys_log.info("/c060 状态导入成功", "Sys");
-  loadBag(global_bag.arr);
+  loadBag(global_bag.arr,global_equi);
   loadBag_goods(global_bag_goods.map);
   sys_log.info("/c060 背包导入成功", "Sys");
 }
-</script>
-
-<style scoped>
-@import './panel.css';
-.store_outer {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: rgb(151, 151, 151);
-  width: 300px;
-  height: 500px;
-  /* margin-left: -150px; */
-  margin-top: -250px;
-  z-index: 2;
+export {
+    saveGame,
+    loadGame,
 }
-
-.store_title {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  font-size: 20px;
-  line-height: 50px;
-  text-align: center;
-}
-.button_group {
-  width: 300px;
-  height: 100%;
-  position: absolute;
-  top: 50px;
-  display: flex;
-  z-index: 6;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-
-.store_button {
-  background-image: url('../ui/UI-button001.png');
-
-  background-color: black;
-  color: black;
-  height: 40px;
-  width: 100px;
-  cursor: pointer;
-  line-height: 40px;
-  text-align: center;
-  user-select: none;
-}
-
-.store_button:hover {
-  background-image: url('../ui/UI-button003.png');
-  /* bottom: 3px; */
-}
-</style>

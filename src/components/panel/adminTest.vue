@@ -4,10 +4,10 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 10:51:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:56:50
+ * @LastEditTime: 2021-11-15 19:03:21
 -->
 <template>
-  <div>
+  <div class="panel_outer ">
     <button @click="logTest()">测试系统提醒</button>
   </div>
 </template>
@@ -82,5 +82,6 @@ for (let key in attrs_key) {
 }
 </script>
 
-<style>
+<style scoped>
+@import './panel.css';
 </style>

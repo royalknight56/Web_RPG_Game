@@ -4,11 +4,11 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:59:31
+ * @LastEditTime: 2021-11-15 19:02:12
 -->
 <template>
   <div>
-    <div class="equip_outer">
+    <div class="panel_outer">
       <div class="equip_title">装备</div>
       <div class="equip_list">
         <div class="equip_item" v-for="item in itemmap" :key="item">
@@ -40,6 +40,7 @@ let itemmap = inject('equi')
 </script>
 
 <style scoped>
+@import './panel.css';
 .equip_outer {
   position: fixed;
   left: 50%;

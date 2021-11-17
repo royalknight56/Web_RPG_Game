@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:58:37
+ * @LastEditTime: 2021-11-16 11:11:32
 -->
 <template>
   <div class="fight_outer">
@@ -17,7 +17,10 @@
       ></itemui>
 
       <div class="fight_button_group">
-        <div @click="fight(enemymap[0])" class="fight_button">攻击</div>
+        <div @click="fight(enemymap[0])" class="fight_button">
+        <div :style="{'width':autoAttack*100+'%'}" class="fight_button_cool"></div>
+        攻击
+        </div>
         <div
           @click="fight(enemymap[0], item)"
           v-for="item in skill"
@@ -62,7 +65,7 @@
 </template>
 
 <script setup>
-import { defineProps, inject, nextTick, onMounted, reactive, ref } from "vue";
+import { defineProps, inject, nextTick, onMounted, onUnmounted, reactive, ref } from "vue";
 import itemui from "./base/item_ui.vue";
 import itemdesc from "./base/item_desc.vue";
 import itembuff from "./base/buff_ui.vue";
@@ -73,13 +76,32 @@ import goods from "../item/goods.js";
 let my = inject("my");
 let global_bag = inject("bag");
 let global_bag_goods = inject("bag_goods");
+let global_sysStates = inject("sysStates");
+
+
 
 let equi = inject("equi");
 
 let skill = inject("skill");
+let enemymap = inject("enemymap");
+let sys_log = inject("log")
 
-
+let autoAttack = ref(0);
 let fightansrc = ref('./fight/attack.gif')
+let timer = setInterval(()=>{
+  autoAttack.value+=0.1
+  if(autoAttack.value>1){
+    autoAttack.value=0
+    fight(enemymap[0])
+  }else{
+
+    // fightansrc.value = './fight/attack.gif'
+  }
+  // autoAttack.value = autoAttack.value>1?0:autoAttack.value
+},100)
+onUnmounted(()=>{
+  clearInterval(timer)
+})
 function attack(from, to) {
   let atk = from.attr.attack;
   let def = to.attr.defense;
@@ -137,13 +159,33 @@ function checkDead(from) {
     if (ind >= 0) {
       enemymap.splice(ind, 1);
     }
+    sys_log.info( `/c111 杀死了 /c100 ${from.name}`,
+    "系统")
+  }
+  //判断地图清空
+  if (enemymap.length == 0) {
+    global_sysStates.loc="town";
+    console.log('清空地图')
+    sys_log.info( `/c111 已经传送到城镇`,
+    "系统")
   }
 }
 function checkMyDead(my){
-  
+  if (my.hp <= 0) {
+    my.hp = my.maxhp;
+
+    my.mp= my.maxmp;
+    global_sysStates.loc='town'
+    sys_log.info( `/c111 哦吼，死亡力`,
+    "系统")
+    sys_log.info( `/c111 已经传送到城镇`,
+    "系统")
+  }
 }
 function fight(enemy, skill) {
-
+  if(global_sysStates.loc=='town'){
+    return
+  }
   beforeRound(enemy);
   beforeRound(my); //回合开始前,检查buff的beforeRound
 
@@ -170,19 +212,19 @@ function fight(enemy, skill) {
   equiAttackCheck(my, enemy);
 }
 
-let enemymap = inject("enemymap");
+
 </script>
 
 <style scoped>
 .fight_outer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.205);
-  width: 100%;
-  height: 100%;
+  /* position: relative; */
+  /* background-color: rgb(255, 0, 0); */
+  /* width: 100%; */
+  /* height: 100%; */
 }
 .fight_logo {
   position: absolute;
-  top: 40px;
+  top: 60px;
   right: 0;
   animation: enemylogoan 1s;
   /* margin-left: -30px; */
@@ -190,7 +232,7 @@ let enemymap = inject("enemymap");
 
 .fight_button_group {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -203,6 +245,13 @@ let enemymap = inject("enemymap");
   text-align: center;
   background-color: black;
   color: aliceblue;
+  position: relative;
+}
+.fight_button_cool{
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  mix-blend-mode: difference;
 }
 .fight_button:hover {
   background-color: aliceblue;
@@ -218,11 +267,11 @@ let enemymap = inject("enemymap");
 }
 .fight_hp {
   position: absolute;
-  top: 0;
+  top: 0px;
   right: 0;
 
-  width: 400px;
-  height: 40px;
+  width: 30%;
+  height: 60px;
   line-height: 40px;
   background-color: rgb(160, 13, 13);
   color: aliceblue;
@@ -233,7 +282,7 @@ let enemymap = inject("enemymap");
   top: 0;
   left: 0;
 
-  width: 400px;
+  width: 50%;
   height: 40px;
   line-height: 40px;
   background-color: rgb(160, 13, 13);
@@ -245,7 +294,7 @@ let enemymap = inject("enemymap");
   top: 40px;
   left: 0;
 
-  width: 400px;
+  width:  50%;
   height: 20px;
   line-height: 20px;
   background-color: rgb(0, 41, 175);
@@ -261,7 +310,7 @@ let enemymap = inject("enemymap");
 }
 .buff_list {
   position: absolute;
-  top: 110px;
+  top: 125px;
   right: 0;
   /* margin-left: -30px; */
   display: flex;
@@ -270,7 +319,7 @@ let enemymap = inject("enemymap");
   position: absolute;
   user-select: none;
   left: 50%;
-  top: 50%;
+  top: 30%;
 }
 </style>
 <style>

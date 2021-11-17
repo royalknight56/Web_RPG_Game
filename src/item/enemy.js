@@ -3,15 +3,15 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-24 20:35:11
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-04-01 17:42:34
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-11-16 11:12:09
  */
 
 export default {
     yezhu001: {
         id: 'default',
         src: "./enemy/xiaoyezhu001.png",
-        name: "无",
+        name: "小野猪",
         desc: ["小野猪"],
         hp: 100,
         mp: 100,
@@ -58,7 +58,7 @@ export default {
     yezhu002: {
         id: 'default',
         src: "./enemy/xiaoyezhu001.png",
-        name: "无",
+        name: "大野猪",
         desc: ["大野猪"],
         hp: 200,
         mp: 100,

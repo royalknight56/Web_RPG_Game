@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:35:09
+ * @LastEditTime: 2021-11-15 19:06:08
 -->
 <template>
   <div
@@ -33,8 +33,11 @@
         {{ item.name }}
       </div>
     </div>
-    <div
+    <!-- <div
       :style="{ left: item_hover_x + 'px', top: item_hover_y + 'px' }"
+      class="item_hover_ui"
+    > -->
+    <div
       class="item_hover_ui"
     >
       <div v-if="peritem.name" class="item_hover_ui_name">
@@ -118,6 +121,8 @@ function chose(item) {
 }
 .item_hover_ui {
   position: fixed;
+  top: 0;
+  left: 0;
   display: none;
   pointer-events: none;
   z-index: 4;

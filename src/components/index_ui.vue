@@ -4,12 +4,15 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 15:55:00
+ * @LastEditTime: 2021-11-16 11:01:57
 -->
 <template>
   <div class="main_layout">
     <div class="main_flex">
-      <fight></fight>
+      <div class="fight_outer">
+        <fight v-if='global_sysStates.loc!="town"'></fight>
+      </div>
+      
       <div class="index_ui_button_group">
         <div
         v-for="(item,key) in tabslist"
@@ -50,7 +53,7 @@
 </template>
 
 <script setup>
-import { defineProps, reactive } from "vue";
+import { defineProps, reactive,inject } from "vue";
 // import imgsrc from '../assets/wepon/stick01.png'
 import store from "./panel/shop_panel.vue";
 import mybag from "./panel/mybag_panel.vue";
@@ -61,6 +64,7 @@ import fmap from "./panel/map_panel.vue";
 import admintest from "./panel/adminTest.vue";
 import syslog from "./sys_log.vue";
 import setting from "./panel/setting_panel.vue";
+let global_sysStates = inject("sysStates");
 
 let vis = reactive({
   store: false,
@@ -114,14 +118,17 @@ function tabVisChange(tab) {
 </script>
 
 <style scoped>
+
 .main_layout {
-  width: 1100px;
-  height: 600px;
+  /* width: 1100px;
+  height: 600px; */
+  width: 100%;
+  height: 100%;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -550px;
-  margin-top: -300px;
+  /* left: 50%; */
+  /* top: 50%; */
+  /* margin-left: -550px; */
+  /* margin-top: -300px; */
   overflow: hidden;
 }
 .main_flex {
@@ -130,8 +137,14 @@ function tabVisChange(tab) {
   align-items: center;
   height: 100%;
 }
+.fight_outer {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.205);
+  width: 100%;
+  height: 100%;
+}
 .index_ui_button_group {
-  width: 1100px;
+  width: 100%;
   /* position: absolute; */
   bottom: 0;
   display: flex;

@@ -4,11 +4,11 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:36:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 16:00:23
+ * @LastEditTime: 2021-11-15 19:02:31
 -->
 <template>
   <div>
-    <div class="store_outer">
+    <div class="panel_outer">
       <div class="store_title">商店</div>
       <div class="store_list">
         <itemlistui :itemtab='tab' :itemlist="itemlist"></itemlistui>
@@ -35,6 +35,7 @@ let itemlist = reactive([
 </script>
 
 <style scoped>
+@import './panel.css';
 .store_outer {
   position: fixed;
   left: 50%;

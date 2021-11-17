@@ -4,10 +4,10 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 16:00:05
+ * @LastEditTime: 2021-11-15 19:02:07
 -->
 <template>
-  <div class="store_outer">
+  <div class="panel_outer">
     <div class="store_title">背包</div>
     <div class="store_tab">
       <div @click="showBag = true" :class="{chosen_store_tab_item:showBag}" class="store_tab_item">装备</div>
@@ -109,6 +109,7 @@ let goodstab = reactive([
 </script>
 
 <style scoped>
+@import './panel.css';
 .store_outer {
   position: fixed;
   left: 50%;
