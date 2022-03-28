@@ -1,6 +1,6 @@
 <!--
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2021-11-17 19:07:00
+ * @LastEditTime: 2022-03-28 15:14:07
  * @Description: 
 -->
 <template>
@@ -19,9 +19,6 @@ import { ref } from '@vue/reactivity'
 import {loadGame} from "./libs/games/game_load.js";
 import {myComputedAttr} from "./libs/games/game_start.js"
 import { inject } from '@vue/runtime-core';
-
-
-
 
 let global_my = inject("my");
 let global_bag = inject("bag");
@@ -48,6 +45,7 @@ function actionFun(msg){
 </script>
 
 <style>
+
 body{
 	margin: 0;
 	padding: 0;

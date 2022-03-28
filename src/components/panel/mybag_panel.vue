@@ -4,14 +4,16 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:02:07
+ * @LastEditTime: 2022-03-28 19:14:43
 -->
 <template>
   <div class="panel_outer">
     <div class="store_title">背包</div>
-    <div class="store_tab">
-      <div @click="showBag = true" :class="{chosen_store_tab_item:showBag}" class="store_tab_item">装备</div>
-      <div @click="showBag = false" :class="{chosen_store_tab_item:!showBag}" class="store_tab_item">消耗品</div>
+    <div class="store_tab flex absolute top-12 w-full justify-center">
+      <div @click="showBag = true" :class="{chosen_store_tab_item:showBag}" class="relative w-24 h-10 leading-10
+      text-center cursor-pointer bg-coc">装备</div>
+      <div @click="showBag = false" :class="{chosen_store_tab_item:!showBag}" class="relative w-24 h-10 leading-10
+      text-center cursor-pointer bg-coc">消耗品</div>
     </div>
     <div v-if="showBag" class="store_list">
       <itemlistui :itemtab="tab" :itemlist="global_bag.arr"></itemlistui>
@@ -123,7 +125,9 @@ let goodstab = reactive([
 }
 .store_list {
   position: absolute;
-  top: 100px;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .store_title {
   position: absolute;
@@ -133,22 +137,8 @@ let goodstab = reactive([
   line-height: 50px;
   text-align: center;
 }
-.store_tab {
-  display: flex;
-  position: absolute;
-  top: 50px;
-  width: 100%;
-}
-.store_tab_item {
-  position: relative;
-  cursor: pointer;
-  width: 200px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  background-color: rgb(0, 0, 0);
-  color: aliceblue;
-}
+
+
 .chosen_store_tab_item{
   background-color: aliceblue;
   color:  rgb(0, 0, 0);

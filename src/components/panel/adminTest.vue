@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 10:51:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-17 19:02:46
+ * @LastEditTime: 2022-03-24 10:59:19
 -->
 <template>
   <div class="panel_outer ">
@@ -30,6 +30,9 @@ function logTest() {
 }
 
 global_bag.addItems("wuqi001");
+
+// global_bag.addItems("wuqit001");
+
 global_bag.addItems("wuqi002");
 global_bag.addItems("wuqi003");
 global_bag.addItems("shangyi001");

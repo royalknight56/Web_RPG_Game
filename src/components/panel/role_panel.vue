@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-17 19:04:18
+ * @LastEditTime: 2022-03-25 10:42:03
 -->
 <template>
   <div>
@@ -35,6 +35,13 @@
           <div class="panel_attr_key">经验</div>
           <div class="panel_attr_value">
             {{ my.exp }}
+          </div>
+        </div>
+
+        <div class="panel_attr">
+          <div class="panel_attr_key">金币</div>
+          <div class="panel_attr_value">
+            {{ my.gold }}
           </div>
         </div>
 
@@ -73,19 +80,8 @@ let attrs_key = {
   strength: "力量",
   intelligence: "智力",
   speed: "速度",
+  gold:"金币"
 };
-// for (let key in attrs_key) {
-  
-//   my.computedAttr[key] = computed(() => {
-//     let total = 0;
-//     for (let pos in equi) {
-//       total += equi[pos]?.attr?.[key] ?? 0;
-//     }
-//     total += my.baseAttr[key] ?? 0;
-//     my.attr[key] = total;
-//     return total;
-//   });
-// }
 
 </script>
 

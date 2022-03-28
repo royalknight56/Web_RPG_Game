@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-17 19:43:56
+ * @LastEditTime: 2022-03-28 15:14:51
 -->
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
@@ -24,7 +24,36 @@ kvProvide(kv)
 </script>
 
 <style>
+@import "./index.css";
+
+@font-face {
+  font-family: "LXGWWenKai-Bold";
+  src: url("LXGWWenKai-Bold.eot"); /* IE9 */
+  src: url("LXGWWenKai-Bold.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */
+      /* url("LXGWWenKai-Bold.woff") format("woff"), chrome、firefox */
+      url("LXGWWenKai-Bold.ttf") format("truetype"),
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+      url("LXGWWenKai-Bold.svg#LXGWWenKai-Bold") format("svg"); /* iOS 4.1- */
+  font-style: normal;
+  font-weight: normal;
+}
+.lxgwwenkai-bold {
+  font-family: "LXGWWenKai-Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("LXGWWenKai-Bold.eot"); /* IE9 */
+  src: url("LXGWWenKai-Bold.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("LXGWWenKai-Bold.woff") format("woff"),
+    /* chrome、firefox */ url("LXGWWenKai-Bold.ttf") format("truetype"),
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+      url("LXGWWenKai-Bold.svg#LXGWWenKai-Bold") format("svg"); /* iOS 4.1- */
+  font-style: normal;
+  font-weight: normal;
+}
+
 body{
+	font-family: "LXGWWenKai-Bold";
 	margin: 0;
 	padding: 0;
 }

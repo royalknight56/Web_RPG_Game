@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-04-03 21:32:57
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:02:27
+ * @LastEditTime: 2022-03-25 11:03:20
 -->
 <template>
   <div class="panel_outer">
@@ -139,10 +139,12 @@ function loadGame() {
   loadBag_goods(global_bag_goods.map);
   sys_log.info("/c060 背包导入成功", "Sys");
 }
+
+loadGame()
 </script>
 
 <style scoped>
-@import './panel.css';
+@import "./panel.css";
 .store_outer {
   position: fixed;
   left: 50%;
@@ -175,9 +177,8 @@ function loadGame() {
   justify-content: space-around;
 }
 
-
 .store_button {
-  background-image: url('../ui/UI-button001.png');
+  background-image: url("../ui/UI-button001.png");
 
   background-color: black;
   color: black;
@@ -190,7 +191,7 @@ function loadGame() {
 }
 
 .store_button:hover {
-  background-image: url('../ui/UI-button003.png');
+  background-image: url("../ui/UI-button003.png");
   /* bottom: 3px; */
 }
 </style>

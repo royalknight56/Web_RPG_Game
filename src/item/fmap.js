@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-26 10:07:38
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 16:07:53
+ * @LastEditTime: 2022-03-25 10:21:39
  */
 function repateEnemy(id, num) {//重复怪物列表
   let arr = [];
@@ -41,6 +41,8 @@ export default {
     enemylist: [
       ...repateEnemy('yezhu001', 3),
       ...repateEnemy('yezhu002', 3),
+      ...repateEnemy('yezhu003', 3),
+
     ]
   }
 }

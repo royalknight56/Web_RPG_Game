@@ -4,50 +4,37 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-17 11:23:58
+ * @LastEditTime: 2022-03-28 15:41:08
 -->
 <template>
-  <div class="fight_outer">
+  <div class="fight_outer relative h-full">
     <div v-if="enemymap[0]" class="fight_ui">
       <!-- <div class="equip_item" v-for="item in enemymap" :key="item"> -->
-      <itemui
-        class="fight_logo"
-        :peritem="enemymap[0]"
-        :key="enemymap[0]"
-      ></itemui>
-
-      <div class="fight_button_group">
-        <div @click="fight(enemymap[0])" class="fight_button">
-        <div :style="{'width':autoAttack*100+'%'}" class="fight_button_cool"></div>
-        攻击
+      <itemui class="fight_logo" :peritem="enemymap[0]" :key="enemymap[0]"></itemui>
+      <div class="absolute bottom-0 flex left-1/2 -translate-x-1/2 rounded-xl overflow-hidden">
+        <div @click="switchAutoAttack" class="fight_button relative
+         w-24 h-12 leading-10 text-center bg-cog text-white cursor-pointer">
+          <div :style="{ 'width': autoAttack * 100 + '%' }" class="fight_button_cool"></div>攻击
         </div>
         <div
           @click="fight(enemymap[0], item)"
           v-for="item in skill"
           :key="item"
-          class="fight_button"
-        >
-          {{ item.name }}
-        </div>
-        <!-- <div @click="fight(enemymap[0])" class="fight_button">技能1</div>
-          <div @click="fight(enemymap[0])" class="fight_button">技能2</div>
-          <div @click="fight(enemymap[0])" class="fight_button">技能3</div> -->
+          class="fight_button relative
+         w-24 h-12 leading-10 text-center bg-cog text-white cursor-pointer"
+        >{{ item.name }}</div>
       </div>
       <div class="fight_right">
         <div class="fight_hp">{{ enemymap[0].hp }}</div>
         <div class="buff_list">
-          <div
-            class="fight_buff"
-            v-for="perbuff in enemymap[0].buff"
-            :key="perbuff"
-          >
+          <div class="fight_buff" v-for="perbuff in enemymap[0].buff" :key="perbuff">
             <itembuff :peritem="perbuff"></itembuff>
           </div>
         </div>
       </div>
     </div>
     <div class="fight_ani">
-      <img  :src="fightansrc">
+      <img :src="fightansrc" />
     </div>
     <div class="fight_ui">
       <div class="fight_right">
@@ -87,28 +74,45 @@ let enemymap = inject("enemymap");
 let sys_log = inject("log")
 
 let autoAttack = ref(0);
+let isAutoAttack = ref(false);
 let fightansrc = ref('./fight/attack.gif')
-let timer = setInterval(()=>{
-  autoAttack.value+=0.1
-  if(autoAttack.value>1){
-    autoAttack.value=0
-    fight(enemymap[0])
-  }else{
+let timer = setInterval(() => {
+  autoAttack.value += 0.1
+  if (autoAttack.value > 1) {
+    if (isAutoAttack.value) {
+      autoAttack.value = 0
+      fight(enemymap[0])
+    } else {
+      autoAttack.value = 1
+    }
+
+  } else {
 
     // fightansrc.value = './fight/attack.gif'
   }
   // autoAttack.value = autoAttack.value>1?0:autoAttack.value
-},100)
-onUnmounted(()=>{
+}, 100)
+onUnmounted(() => {
   clearInterval(timer)
 })
+
+/**
+ * @description: 攻击伤害计算公式
+ */
 function attack(from, to) {
-  let atk = from.attr.attack;
+  // 攻击X（1+0.004 * 力量 +0.004 * 智力）
+  // 闪避率 = 基础闪避率 + 0.004 * 敏捷
+  // 暴击率 = 基础暴击率 + 暴击率
+  // 伤害 = 攻击 + 伤害附加白字
+
+  // 判断是否闪避
+  // let isDodge = Math.random() < (from.attr.agile - to.attr.agile) / 100;
+  let atk = from.attr.attack || 0 * (1 + 0.004 * from.attr.strength || 0 + 0.004 * from.attr.intelligence || 0); // 攻击X（1+0.004 * 力量 +0.004 * 智力）
   let def = to.attr.defense;
-  
+
   let dam = Math.floor(
     (atk * atk) /
-      (atk + def + 1)
+    (atk + def + 1)
   );
   to.hp -= dam;
 }
@@ -123,7 +127,7 @@ function beforeRound(from) {
 function afterRound(from) {
   if (from?.buff) {
     for (let key in from.buff) {
-      from.buff[key].afterRound?.(from);
+      from.buff[key]?.afterRound?.(from);
       from.buff[key].numbers--;
       if (from.buff[key].numbers <= 0) {
         delete from.buff[key];
@@ -151,41 +155,45 @@ function checkDead(from) {
         }
       }
     }
+    //处理经验获得
     if (res?.exp) {
-      //处理经验获得
-      my.exp+=res?.exp
+      my.exp += res?.exp
+    }
+    //处理金币获得
+    if (res?.gold) {
+      my.gold += res?.gold
     }
     let ind = enemymap.indexOf(from);
     if (ind >= 0) {
       enemymap.splice(ind, 1);
     }
-    sys_log.info( `/c111 杀死了 /c100 ${from.name}`,
-    "系统")
+    sys_log.info(`/c111 杀死了 /c100 ${from.name}`,
+      "系统")
   }
   //判断地图清空
   if (enemymap.length == 0) {
-    global_sysStates.loc="town";
+    global_sysStates.loc = "town";
     console.log('清空地图')
     my.hp = my.maxhp;
-    my.mp= my.maxmp;
-    sys_log.info( `/c111 已经传送到城镇`,
-    "系统")
+    my.mp = my.maxmp;
+    sys_log.info(`/c111 已经传送到城镇`,
+      "系统")
   }
 }
-function checkMyDead(my){
+function checkMyDead(my) {
   if (my.hp <= 0) {
     my.hp = my.maxhp;
 
-    my.mp= my.maxmp;
-    global_sysStates.loc='town'
-    sys_log.info( `/c111 哦吼，死亡力`,
-    "系统")
-    sys_log.info( `/c111 已经传送到城镇`,
-    "系统")
+    my.mp = my.maxmp;
+    global_sysStates.loc = 'town'
+    sys_log.info(`/c111 哦吼，死亡了`,
+      "系统")
+    sys_log.info(`/c111 已经传送到城镇`,
+      "系统")
   }
 }
 function fight(enemy, skill) {
-  if(global_sysStates.loc=='town'){
+  if (global_sysStates.loc == 'town') {
     return
   }
   beforeRound(enemy);
@@ -195,10 +203,10 @@ function fight(enemy, skill) {
   if (skill && my.mp - skill.mp >= 0) {
     //是否使用了技能和是否有蓝量使用技能
     skill.use(my, enemy);
-    fightansrc.value=skill.ani+'?'+new Date().toString()
+    fightansrc.value = skill.ani + '?' + new Date().toString()
     my.mp = my.mp - skill.mp;
   } else {
-    fightansrc.value = './fight/attack.gif'+'?'+new Date().toString()
+    fightansrc.value = './fight/attack.gif' + '?' + new Date().toString()
     attack(my, enemy);
   }
 
@@ -214,12 +222,15 @@ function fight(enemy, skill) {
   equiAttackCheck(my, enemy);
 }
 
-
+function switchAutoAttack() {
+  isAutoAttack.value = !isAutoAttack.value;
+}
 </script>
 
 <style scoped>
 .fight_outer {
   /* position: relative; */
+  /* top: 200px; */
   /* background-color: rgb(255, 0, 0); */
   /* width: 100%; */
   /* height: 100%; */
@@ -232,14 +243,7 @@ function fight(enemy, skill) {
   /* margin-left: -30px; */
 }
 
-.fight_button_group {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-}
-.fight_button {
+/* .fight_button {
   cursor: pointer;
   width: 100px;
   height: 50px;
@@ -248,8 +252,8 @@ function fight(enemy, skill) {
   background-color: black;
   color: aliceblue;
   position: relative;
-}
-.fight_button_cool{
+} */
+.fight_button_cool {
   position: absolute;
   background-color: rgb(255, 255, 255);
   height: 100%;
@@ -296,7 +300,7 @@ function fight(enemy, skill) {
   top: 40px;
   left: 0;
 
-  width:  50%;
+  width: 50%;
   height: 20px;
   line-height: 20px;
   background-color: rgb(0, 41, 175);
@@ -317,7 +321,7 @@ function fight(enemy, skill) {
   /* margin-left: -30px; */
   display: flex;
 }
-.fight_ani{
+.fight_ani {
   position: absolute;
   user-select: none;
   left: 50%;

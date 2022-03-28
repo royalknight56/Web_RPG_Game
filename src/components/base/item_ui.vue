@@ -4,15 +4,10 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:06:08
+ * @LastEditTime: 2022-03-28 18:35:21
 -->
 <template>
-  <div
-    @mouseleave="item_leave()"
-    @mousemove="item_hover($event)"
-    ref="item_sel"
-    class="item_outer"
-  >
+  <div @mouseleave="item_leave()" @mousemove="item_hover($event)" ref="item_sel" class="item_outer">
     <img
       draggable="false"
       class="item_img"
@@ -29,27 +24,19 @@
         :key="key"
         @click.stop="chose(item)"
         class="item_ui_item"
-      >
-        {{ item.name }}
-      </div>
+      >{{ item.name }}</div>
     </div>
     <!-- <div
       :style="{ left: item_hover_x + 'px', top: item_hover_y + 'px' }"
       class="item_hover_ui"
-    > -->
-    <div
-      class="item_hover_ui"
-    >
+    >-->
+    <div class="item_hover_ui" :class="{isover:isover}">
       <div v-if="peritem.name" class="item_hover_ui_name">
         <itemdesc :desc="peritem.name"></itemdesc>
         <!-- {{ peritem.name }} -->
       </div>
       <div v-if="peritem.desc">
-        <div
-          v-for="perdesc in peritem.desc"
-          :key="perdesc"
-          class="item_hover_ui_desc"
-        >
+        <div v-for="perdesc in peritem.desc" :key="perdesc" class="item_hover_ui_desc">
           <itemdesc :item="peritem" :desc="perdesc"></itemdesc>
           <!-- {{ peritem.desc }} -->
         </div>
@@ -59,7 +46,7 @@
 </template>
 
 <script setup>
-import { defineProps, nextTick, reactive, ref } from "vue";
+import { defineProps, nextTick, onMounted, onUpdated, reactive, ref } from "vue";
 // import imgsrc from '../assets/wepon/stick01.png'
 import itemdesc from "./item_desc.vue";
 let props = defineProps({
@@ -68,15 +55,13 @@ let props = defineProps({
 });
 let item_sel = ref(null);
 let ifchose = ref(false);
-let item_hover_x = ref(0);
-let item_hover_y = ref(0);
+let isover = ref(false);
+
+
 function item_hover(e) {
-  if (e.clientX > window.innerWidth - 140) {//判断是否靠近右边界
-    item_hover_x.value = e.clientX-140;
-    item_hover_y.value = e.clientY;
-  } else {
-    item_hover_x.value = e.clientX;
-    item_hover_y.value = e.clientY;
+  let rect = item_sel.value.getBoundingClientRect();
+  if(rect.right > window.innerWidth - 80){
+    isover.value=true;
   }
 }
 function item_mousedown(e) {
@@ -120,9 +105,9 @@ function chose(item) {
   background-color: rgba(255, 255, 255, 0.61);
 }
 .item_hover_ui {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  /* top: 0; */
+  /* left: 0; */
   display: none;
   pointer-events: none;
   z-index: 4;
@@ -158,5 +143,9 @@ function chose(item) {
   left: 0;
   background-color: rgba(0, 0, 0, 0.616);
   color: aliceblue;
+}
+.isover{
+  position: relative;
+  transform: translateX(-100%);
 }
 </style>

@@ -4,10 +4,9 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 20:37:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 20:00:43
+ * @LastEditTime: 2022-03-25 11:14:19
 -->
 <template>
-  <div>
     <div class="msg_outer" :class="{msg_hidden:!ifshow}">
       <div @click="vischange()" class="msg_title">系统消息</div>
       <div v-show="ifshow" class="msg_list" ref="msg_list">
@@ -17,7 +16,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -29,7 +27,6 @@ let msg_list = ref(null)
 
 let ifshow = ref(true)
 watch(sys_log.list,(msg)=>{
-  console.log('test')
   nextTick(()=>{
     msg_list.value.scrollTop=msg_list.value.scrollHeight
   })
@@ -44,9 +41,9 @@ a {
   color: #42b983;
 }
 .msg_outer {
-  position: absolute;
-  bottom: 120px;
-  background-color: rgba(0, 0, 0, 0.205);
+  position: relative;
+  /* bottom: 50px; */
+  /* background-color: rgba(0, 0, 0, 0.205); */
   width: 100%;
   height: 100px;
   display: flex;

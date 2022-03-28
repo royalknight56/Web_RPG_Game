@@ -4,16 +4,18 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-17 11:17:36
+ * @LastEditTime: 2022-03-28 16:02:43
 -->
 <template>
-  <div class="main_layout">
-    <div class="main_flex">
-      <div class="fight_outer">
+
+  <div class="absolute w-full h-full overflow-hidden">
+    <div class="flex flex-col items-center h-full">
+      <div class="relative w-full h-full bg-coe">
         <fight v-if='global_sysStates.loc!="town"'></fight>
         <first_townVue  v-if='global_sysStates.loc=="town"'></first_townVue>
       </div>
-      <div class="index_ui_button_group">
+      <syslog></syslog>
+      <div class="flex bottom-0 w-full z-[6]">
         <div
         v-for="(item,key) in tabslist"
         :key='item'
@@ -24,9 +26,18 @@
           {{item.name}}
         </div>
       </div>
+      <store v-show="vis.cur=='store'"></store>
+      <mybag v-show="vis.cur=='mybag'"></mybag>
+      <mypanel v-show="vis.cur=='mypanel'"></mypanel>
+      <!-- 使用v-show使得计算属性被触摸 -->
+      <myequi v-show="vis.cur=='myequi'"></myequi>
+
+      <fmap v-show="vis.cur=='fmap'"></fmap>
+      <setting  v-show="vis.cur=='setting'"></setting>
+      <admintest v-show="vis.cur=='test'"></admintest>
+      
     </div>
-    <syslog></syslog>
-    <div class="index_window">
+    <!-- <div class="index_window"> -->
 
       <!-- <store v-show="tabslist.store.show"></store>
       <mybag v-show="tabslist.mybag.show"></mybag>
@@ -38,17 +49,9 @@
       <admintest v-show="tabslist.test.show"></admintest> -->
 
 
-      <store v-show="vis.cur=='store'"></store>
-      <mybag v-show="vis.cur=='mybag'"></mybag>
-      <mypanel v-show="vis.cur=='mypanel'"></mypanel>
-      <!-- 使用v-show使得计算属性被触摸 -->
-      <myequi v-show="vis.cur=='myequi'"></myequi>
+      
 
-      <fmap v-show="vis.cur=='fmap'"></fmap>
-      <setting  v-show="vis.cur=='setting'"></setting>
-      <admintest v-show="vis.cur=='test'"></admintest>
-
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -121,37 +124,25 @@ function tabVisChange(tab) {
 
 <style scoped>
 
-.main_layout {
-  /* width: 1100px;
-  height: 600px; */
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  /* left: 50%; */
-  /* top: 50%; */
-  /* margin-left: -550px; */
-  /* margin-top: -300px; */
-  overflow: hidden;
-}
-.main_flex {
+
+/* .main_flex {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-}
-.fight_outer {
+} */
+/* .fight_outer {
   position: relative;
   background-color: rgba(0, 0, 0, 0.205);
   width: 100%;
   height: 100%;
-}
-.index_ui_button_group {
+} */
+/* .index_ui_button_group {
   width: 100%;
-  /* position: absolute; */
   bottom: 0;
   display: flex;
   z-index: 6;
-}
+} */
 .index_ui_button {
   background-image: url('../ui/UI-button001.png');
     position: relative;
@@ -180,5 +171,7 @@ function tabVisChange(tab) {
 .index_window {
   position: absolute;
   top: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
