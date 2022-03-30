@@ -1,6 +1,6 @@
 /*
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2021-11-17 19:02:51
+ * @LastEditTime: 2022-03-29 17:16:26
  * @Description: 
  */
 import { computed, inject } from "vue";
@@ -13,6 +13,8 @@ import { computed, inject } from "vue";
 //attr:生效属性
 function myComputedAttr(global_my,global_equi){
     let attrs_key = {
+      hp: "hp",
+      mp: "mp",
         attack: "攻击力",
       
         defense: "防御力",

@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-28 09:39:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-28 16:02:43
+ * @LastEditTime: 2022-03-28 19:59:14
 -->
 <template>
 
@@ -14,6 +14,7 @@
         <fight v-if='global_sysStates.loc!="town"'></fight>
         <first_townVue  v-if='global_sysStates.loc=="town"'></first_townVue>
       </div>
+      <myState></myState>
       <syslog></syslog>
       <div class="flex bottom-0 w-full z-[6]">
         <div
@@ -62,12 +63,14 @@ import store from "./panel/shop_panel.vue";
 import mybag from "./panel/mybag_panel.vue";
 import mypanel from "./panel/role_panel.vue";
 import myequi from "./panel/myequipment_panel.vue";
-import fight from "./fight.vue";
 import fmap from "./panel/map_panel.vue";
 import admintest from "./panel/adminTest.vue";
-import syslog from "./sys_log.vue";
 import setting from "./panel/setting_panel.vue";
+
+import fight from "./fight.vue";
+import syslog from "./sys_log.vue";
 import first_townVue from "./town/first_town.vue";
+import myState from "./uicom/my_state.vue"
 
 let global_sysStates = inject("sysStates");
 
@@ -147,6 +150,7 @@ function tabVisChange(tab) {
   background-image: url('../ui/UI-button001.png');
     position: relative;
   background-color: black;
+  background-size: 100% 100%;
   color: black;
   height: 40px;
   width: 100px;

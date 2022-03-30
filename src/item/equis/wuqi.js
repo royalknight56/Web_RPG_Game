@@ -1,6 +1,6 @@
 /*
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2022-03-25 10:16:41
+ * @LastEditTime: 2022-03-29 19:02:48
  * @Description: 
  */
 export default {
@@ -8,11 +8,7 @@ export default {
     id: 'wuqi001',
     src: "./wepon/stick01_blod.png",
     name: "铁棍-/c900 血附魔/",
-    desc: ["攻击+ /aattack ", "这个铁棍附带/c900 流血伤害/"],
-    equdesc: [
-      '武器',
-      '攻击+/c111 /aattack ',
-    ],
+    desc: ['武器',"攻击+ /aattack ", "这个铁棍附带/c900 流血伤害/"],
     pos: 'wuqi',
     attr: {
       attack: 80,
@@ -40,11 +36,8 @@ export default {
     id: 'wuqi002',
     src: "./wepon/stick01_blod.png",
     name: "铁棍",
-    desc: ["攻击+ /aattack "],
-    equdesc: [
-      '武器',
-      '攻击+/c111 /aattack ',
-    ],
+    desc: ['武器',"攻击+ /aattack "],
+
     pos: 'wuqi',
     attr: {
       attack: 20,
@@ -57,11 +50,8 @@ export default {
     id: 'wuqi003',
     src: "./wepon/stick01_blod.png",
     name: "铁棍-/c900 燃烧附魔/",
-    desc: ["攻击+ /aattack ", "这个铁棍附带/c900 燃烧伤害/"],
-    equdesc: [
-      '武器',
-      '攻击+ /aattack ',
-    ],
+    desc: ['武器',"攻击+ /aattack ", "这个铁棍附带/c900 燃烧伤害/"],
+
     pos: 'wuqi',
     attr: {
       attack: 230,
@@ -90,13 +80,7 @@ export default {
     id: 'yuren001',
     src: "./wepon/yuren001.png",
     name: "羽刃",
-    desc: ["攻击+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
-    equdesc: [
-      '武器',
-      '防御+ /adefense ',
-      '智力+ /aintelligence ',
-      '力量+ /adefense ',
-    ],
+    desc: ['武器',"攻击+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     pos: 'wuqi',
     attr: {
       defense: 20,

@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2020-12-07 15:55:59
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-25 10:41:32
+ * @LastEditTime: 2022-03-29 19:18:17
  */
 import goods from "../item/goods.js";
 import equi from "../item/equi.js";
@@ -32,10 +32,13 @@ export default {
     loc:'town'
   },
   my: {
-    hp: 100,
-    maxhp: 100,
-    mp: 100,
-    maxmp: 100,
+    usedhp:0,
+    usedmp:0,
+    // hp: 100,
+    // maxhp: 100,
+
+    // mp: 100,
+    // maxmp: 100,
     spirit: 120,
     exp:0,
     gold:200,
@@ -45,8 +48,10 @@ export default {
 
     },
     baseAttr: {
-      attack: 0,
-      defense: 0,
+      hp: 100,
+      mp: 100,
+      attack: 10,
+      defense: 1,
       strength: 0,
       intelligence: 0,
       agile: 0,

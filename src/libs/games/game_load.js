@@ -1,37 +1,12 @@
 
 import equi from "../../item/equi.js";
 import goods from "../../item/goods.js";
+// import {inject} from "vue"
 // let global_my = inject("my");
 // let global_bag = inject("bag");
 // let global_bag_goods = inject("bag_goods");
 // let global_equi = inject("equi");
 // let sys_log = inject("log");
-
-function saveMy(my) {
-  localStorage.setItem(
-    "my",
-    JSON.stringify({
-      hp: my.hp,
-      mp: my.mp,
-      maxhp: my.maxhp,
-      maxmp: my.maxmp,
-      spirit: my.spirit,
-      baseAttr: my.baseAttr,
-      exp: my.exp,
-    })
-  );
-}
-function loadMy(my) {
-  let myobj = JSON.parse(localStorage.getItem("my"));
-  my.hp = myobj.hp;
-  my.mp = myobj.mp;
-  my.maxhp = myobj.maxhp;
-  my.maxmp = myobj.maxmp;
-  my.spirit = myobj.spirit;
-  my.exp = myobj.exp;
-  my.baseAttr = myobj.baseAttr;
-}
-
 function copyKey(funObj, attrObj) {
   //复制Key的函数
   let newObj = {};
@@ -69,6 +44,35 @@ function copyKey(funObj, attrObj) {
   }
 }
 
+function saveMy(my) {
+  localStorage.setItem(
+    "my",
+    JSON.stringify({
+      // hp: my.hp,
+      // mp: my.mp,
+      // maxhp: my.maxhp,
+      // maxmp: my.maxmp,
+      spirit: my.spirit,
+      baseAttr: my.baseAttr,
+      exp: my.exp,
+    })
+  );
+}
+function loadMy(my) {
+  let obj = localStorage.getItem("my")
+  if(!obj){
+    return
+  }
+  let myobj = JSON.parse(obj);
+  // my.hp = myobj.hp;
+  // my.mp = myobj.mp;
+  // my.maxhp = myobj.maxhp;
+  // my.maxmp = myobj.maxmp;
+  my.spirit = myobj.spirit;
+  my.exp = myobj.exp;
+  my.baseAttr = myobj.baseAttr;
+}
+
 function saveBag(bag) {
   localStorage.setItem(
     "bag",
@@ -78,7 +82,11 @@ function saveBag(bag) {
   );
 }
 function loadBag(bag,global_equi) {
-  let bagTemp = JSON.parse(localStorage.getItem("bag"));
+  let obj  = localStorage.getItem("bag");
+  if(!obj){
+    return 
+  }
+  let bagTemp = JSON.parse(obj);
   let bagArr = bagTemp.bag;
   for (let i = 0; i < bagArr.length; i++) {
     let funObj = equi[bagArr[i].id]; //带有函数的OBJ
@@ -96,7 +104,11 @@ function saveBag_goods(bag) {
   localStorage.setItem("bag_goods", JSON.stringify(bag));
 }
 function loadBag_goods(bag_goods) {
-  let bagObj = JSON.parse(localStorage.getItem("bag_goods"));
+  let obj = localStorage.getItem("bag_goods");
+  if(!obj){
+    return
+  }
+  let bagObj = JSON.parse(obj);
   for (let key in bag_goods) {
     delete bag_goods[key];
   }
@@ -120,7 +132,12 @@ function loadGame(global_my,global_bag,global_bag_goods,sys_log,global_equi) {
   loadBag_goods(global_bag_goods.map);
   sys_log.info("/c060 背包导入成功", "Sys");
 }
+
+function clearGame(){
+  localStorage.clear();
+}
 export {
     saveGame,
     loadGame,
+    clearGame
 }

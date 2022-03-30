@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 21:00:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-24 10:58:44
+ * @LastEditTime: 2022-03-29 19:02:46
  */
 import wuqi from "./equis/wuqi"
 export default {
@@ -22,11 +22,7 @@ export default {
     id: 'shangyi001',
     src: "./wepon/shangyi001.png",
     name: "短袖",
-    desc: ["防御+ /adefense "],
-    equdesc: [
-      '上衣',
-      '防御+ /adefense ',
-    ],
+    desc: ['上衣',"防御+ /adefense "],
     pos: 'shangyi',
     attr: {
       defense: 20,
@@ -36,11 +32,7 @@ export default {
     id: 'xiayi001',
     src: "./wepon/xiayi001.png",
     name: "短裤",
-    desc: ["防御+ /adefense "],
-    equdesc: [
-      '下衣',
-      '防御+/c111 /adefense ',
-    ],
+    desc: ['下衣',"防御+ /adefense "],
     pos: 'xiayi',
     attr: {
       defense: 20,
@@ -50,12 +42,7 @@ export default {
     id: 'xiezi001',
     src: "./wepon/xiezi001.png",
     name: "鞋子",
-    desc: ["防御+ /adefense ", "速度+ /aspeed "],
-    equdesc: [
-      '鞋子',
-      '防御+ /adefense ',
-      '速度+ /aspeed ',
-    ],
+    desc: ['鞋子',"防御+ /adefense ", "速度+ /aspeed "],
     pos: 'xiezi',
     attr: {
       defense: 20,
@@ -66,13 +53,7 @@ export default {
     id: 'jiezhi001',
     src: "./wepon/jiezhi001.png",
     name: "戒指",
-    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
-    equdesc: [
-      '戒指',
-      '防御+ /adefense ',
-      '智力+ /aintelligence ',
-      '力量+ /adefense ',
-    ],
+    desc: ['戒指',"防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     pos: 'jiezhi',
     attr: {
       defense: 20,
@@ -84,13 +65,7 @@ export default {
     id: 'xianglian001',
     src: "./wepon/xianglian001.png",
     name: "项链",
-    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
-    equdesc: [
-      '项链',
-      '防御+ /adefense ',
-      '智力+ /aintelligence ',
-      '力量+ /adefense ',
-    ],
+    desc: ['项链',"防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     pos: 'xianglian',
     attr: {
       defense: 20,
@@ -102,13 +77,7 @@ export default {
     id: 'shouzhuo001',
     src: "./wepon/shouzhuo001.png",
     name: "手镯",
-    desc: ["防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
-    equdesc: [
-      '手镯',
-      '防御+ /adefense ',
-      '智力+ /aintelligence ',
-      '力量+ /adefense ',
-    ],
+    desc: ['手镯',"防御+ /adefense ", "智力+ /aintelligence ", '力量+ /adefense ',],
     pos: 'shouzhuo',
     attr: {
       defense: 20,

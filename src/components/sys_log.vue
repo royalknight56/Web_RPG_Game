@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-27 20:37:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-25 11:14:19
+ * @LastEditTime: 2022-03-28 20:08:00
 -->
 <template>
     <div class="msg_outer" :class="{msg_hidden:!ifshow}">
@@ -45,7 +45,7 @@ a {
   /* bottom: 50px; */
   /* background-color: rgba(0, 0, 0, 0.205); */
   width: 100%;
-  height: 100px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   overflow: hidden;

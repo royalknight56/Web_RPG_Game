@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 15:28:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-15 19:02:12
+ * @LastEditTime: 2022-03-29 19:01:19
 -->
 <template>
   <div>
@@ -15,7 +15,7 @@
           <itemui :peritem="item"></itemui>
           <div class="equip_desc">
             <div
-              v-for="perdesc in item.equdesc"
+              v-for="perdesc in item.desc"
               :key="perdesc"
               class="item_hover_ui_desc"
             >
@@ -35,6 +35,7 @@ import { defineProps, inject, reactive } from "vue";
 import itemui from "../base/item_ui.vue";
 import itemdesc from "../base/item_desc.vue";
 let itemmap = inject('equi')
+console.log(itemmap)
 // let equi = inject('equi');
 // let itemlist = reactive();
 </script>

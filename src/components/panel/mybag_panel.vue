@@ -4,12 +4,13 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:38:59
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-28 19:14:43
+ * @LastEditTime: 2022-03-28 19:22:31
 -->
 <template>
   <div class="panel_outer">
-    <div class="store_title">背包</div>
-    <div class="store_tab flex absolute top-12 w-full justify-center">
+    <div class="flex items-center justify-center w-full h-full">
+      <div class="store_title">背包</div>
+    <div class="store_tab flex absolute top-12 justify-center rounded-lg overflow-hidden">
       <div @click="showBag = true" :class="{chosen_store_tab_item:showBag}" class="relative w-24 h-10 leading-10
       text-center cursor-pointer bg-coc">装备</div>
       <div @click="showBag = false" :class="{chosen_store_tab_item:!showBag}" class="relative w-24 h-10 leading-10
@@ -24,6 +25,8 @@
         :itemlist="global_bag_goods.map"
       ></itemmapui>
     </div>
+    </div>
+    
   </div>
 </template>
 

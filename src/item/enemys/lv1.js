@@ -1,6 +1,6 @@
 /*
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2022-03-25 11:04:45
+ * @LastEditTime: 2022-03-29 17:28:02
  * @Description: 
  */
 export default {
@@ -9,9 +9,10 @@ export default {
         src: "./enemy/xiaoyezhu001.png",
         name: "小野猪",
         desc: ["小野猪"],
-        hp: 100,
-        mp: 100,
+
         attr: {
+            hp: 100,
+            mp: 100,
             defense: 10,
             attack: 10,
             afterDead() {
@@ -24,14 +25,14 @@ export default {
                         },
                         {
                             prob: 0.5,
-                            type:'goods',
+                            type: 'goods',
                             id: 'xueping001',
-                            num:1
+                            num: 1
                         }
 
                     ],
-                    exp:30,
-                    gold:2,
+                    exp: 30,
+                    gold: 2,
                 }
             }
         },
@@ -41,9 +42,10 @@ export default {
         src: "./enemy/xiaoyezhu001.png",
         name: "大野猪",
         desc: ["大野猪"],
-        hp: 200,
-        mp: 100,
+
         attr: {
+            hp: 200,
+            mp: 100,
             defense: 20,
             attack: 20,
             afterDead() {
@@ -56,14 +58,14 @@ export default {
                         },
                         {
                             prob: 0.5,
-                            type:'goods',
+                            type: 'goods',
                             id: 'xueping001',
-                            num:4
+                            num: 4
                         }
 
                     ],
-                    exp:30,
-                    gold:4,
+                    exp: 30,
+                    gold: 4,
                 }
             }
         },
@@ -88,9 +90,10 @@ export default {
         src: "./enemy/xiaoyezhu001.png",
         name: "大野猪lv2",
         desc: ["大野猪升级版"],
-        hp: 300,
-        mp: 100,
+
         attr: {
+            hp: 300,
+            mp: 100,
             defense: 10,
             attack: 10,
             afterDead() {
@@ -103,14 +106,14 @@ export default {
                         },
                         {
                             prob: 0.5,
-                            type:'goods',
+                            type: 'goods',
                             id: 'xueping001',
-                            num:1
+                            num: 1
                         }
 
                     ],
-                    exp:30,
-                    gold:5,
+                    exp: 30,
+                    gold: 5,
                 }
             }
         },

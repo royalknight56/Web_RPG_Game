@@ -4,16 +4,16 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-24 15:43:40
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-28 15:41:08
+ * @LastEditTime: 2022-03-29 17:35:57
 -->
 <template>
   <div class="fight_outer relative h-full">
     <div v-if="enemymap[0]" class="fight_ui">
       <!-- <div class="equip_item" v-for="item in enemymap" :key="item"> -->
       <itemui class="fight_logo" :peritem="enemymap[0]" :key="enemymap[0]"></itemui>
-      <div class="absolute bottom-0 flex left-1/2 -translate-x-1/2 rounded-xl overflow-hidden">
+      <div class="absolute bottom-0 flex left-1/2 -translate-x-1/2 rounded-lg overflow-hidden">
         <div @click="switchAutoAttack" class="fight_button relative
-         w-24 h-12 leading-10 text-center bg-cog text-white cursor-pointer">
+         w-24 h-12 leading-10 text-center bg-cod text-white cursor-pointer">
           <div :style="{ 'width': autoAttack * 100 + '%' }" class="fight_button_cool"></div>攻击
         </div>
         <div
@@ -21,11 +21,11 @@
           v-for="item in skill"
           :key="item"
           class="fight_button relative
-         w-24 h-12 leading-10 text-center bg-cog text-white cursor-pointer"
+         w-24 h-12 leading-10 text-center bg-cod text-white cursor-pointer"
         >{{ item.name }}</div>
       </div>
       <div class="fight_right">
-        <div class="fight_hp">{{ enemymap[0].hp }}</div>
+        <div class="fight_hp">{{ enemymap[0].attr.hp - (enemymap[0].usedhp||0) }}</div>
         <div class="buff_list">
           <div class="fight_buff" v-for="perbuff in enemymap[0].buff" :key="perbuff">
             <itembuff :peritem="perbuff"></itembuff>
@@ -38,8 +38,8 @@
     </div>
     <div class="fight_ui">
       <div class="fight_right">
-        <div class="fight_my_hp">{{ my.hp }}</div>
-        <div class="fight_my_mp">{{ my.mp }}</div>
+        <div class="fight_my_hp">{{ my.computedAttr.hp - my.usedhp }}</div>
+        <div class="fight_my_mp">{{ my.computedAttr.mp - my.usedmp }}</div>
 
         <div class="my_buff_list">
           <div class="fight_my_buff" v-for="perbuff in my.buff" :key="perbuff">
@@ -114,7 +114,13 @@ function attack(from, to) {
     (atk * atk) /
     (atk + def + 1)
   );
-  to.hp -= dam;
+  if(to.usedhp){
+    to.usedhp += dam
+  }else{
+    to.usedhp = dam
+  }
+  // to.usedhp +=dam;
+  // to.hp -= dam;
 }
 function beforeRound(from) {
   if (from?.buff) {
@@ -141,7 +147,8 @@ function equiAttackCheck(my, enemy) {
   }
 }
 function checkDead(from) {
-  if (from.hp <= 0) {
+  console.log((from.attr.hp ))
+  if ((from.attr.hp - from.usedhp) <= 0) {
     let res = from.attr.afterDead?.();
     if (res?.drop) {
       //处理掉落物
@@ -174,19 +181,18 @@ function checkDead(from) {
   if (enemymap.length == 0) {
     global_sysStates.loc = "town";
     console.log('清空地图')
-    my.hp = my.maxhp;
-    my.mp = my.maxmp;
+    my.usedhp = 0;
+    my.usedmp = 0;
     sys_log.info(`/c111 已经传送到城镇`,
       "系统")
   }
 }
 function checkMyDead(my) {
-  if (my.hp <= 0) {
-    my.hp = my.maxhp;
-
-    my.mp = my.maxmp;
+  if ((my.computedAttr.hp-my.usedhp) <= 0) {
+    my.usedhp = 0;
+    my.usedmp = 0;
     global_sysStates.loc = 'town'
-    sys_log.info(`/c111 哦吼，死亡了`,
+    sys_log.info(`/c111 小心。死亡了`,
       "系统")
     sys_log.info(`/c111 已经传送到城镇`,
       "系统")
@@ -200,11 +206,11 @@ function fight(enemy, skill) {
   beforeRound(my); //回合开始前,检查buff的beforeRound
 
 
-  if (skill && my.mp - skill.mp >= 0) {
+  if (skill && ((my.computedAttr.mp -my.usedmp ) >= skill.mp)) {
     //是否使用了技能和是否有蓝量使用技能
     skill.use(my, enemy);
     fightansrc.value = skill.ani + '?' + new Date().toString()
-    my.mp = my.mp - skill.mp;
+    my.usedmp += skill.mp;
   } else {
     fightansrc.value = './fight/attack.gif' + '?' + new Date().toString()
     attack(my, enemy);

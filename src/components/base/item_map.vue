@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-26 12:19:57
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-26 12:20:15
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-28 19:43:24
 -->
 <template>
   <div>
@@ -39,7 +39,7 @@ a {
   background-color: rgba(0, 0, 0, 0.144);
   overflow: visible;
 
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 .list_item_outer {
   display: flex;

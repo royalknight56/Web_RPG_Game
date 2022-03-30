@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-26 10:07:38
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-25 10:21:39
+ * @LastEditTime: 2022-03-29 19:10:16
  */
 function repateEnemy(id, num) {//重复怪物列表
   let arr = [];
@@ -43,6 +43,15 @@ export default {
       ...repateEnemy('yezhu002', 3),
       ...repateEnemy('yezhu003', 3),
 
+    ]
+  },
+  xinshoucun005: {
+    id: 'xinshoucun005',
+    name: '野猪王座',
+    desc: ['野猪王座'],
+    spirit: 3,
+    enemylist: [
+      ...repateEnemy('yezhuboss', 3),
     ]
   }
 }

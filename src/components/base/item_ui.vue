@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:29:34
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-28 18:35:21
+ * @LastEditTime: 2022-03-28 19:44:08
 -->
 <template>
   <div @mouseleave="item_leave()" @mousemove="item_hover($event)" ref="item_sel" class="item_outer">
@@ -105,20 +105,20 @@ function chose(item) {
   background-color: rgba(255, 255, 255, 0.61);
 }
 .item_hover_ui {
-  position: relative;
+  position: absolute;
   /* top: 0; */
   /* left: 0; */
   display: none;
+  width: 140px;
+  /* display: block; */
+  background-color: black;
+  color: aliceblue;
   pointer-events: none;
   z-index: 4;
 }
 
 .item_outer:hover .item_hover_ui {
   display: block;
-  position: fixed;
-  width: 140px;
-  background-color: black;
-  color: aliceblue;
   z-index: 99999;
 }
 

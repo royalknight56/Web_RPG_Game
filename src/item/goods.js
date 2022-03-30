@@ -3,8 +3,8 @@
  * @version: 
  * @Author: RoyalKnight
  * @Date: 2021-03-26 12:32:26
- * @LastEditors: RoyalKnight
- * @LastEditTime: 2021-03-28 20:11:26
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-29 17:39:12
  */
 export default {
   xueping001: {
@@ -15,7 +15,7 @@ export default {
     attr: {
       attack: 80,
       use(self) {
-        self.hp += 80;
+        self.usedhp = Math.max(0,self.usedhp-80)
         return {
           state: true
         }
@@ -30,7 +30,7 @@ export default {
     desc: ["血量+ 20"],
     attr: {
       use(self) {
-        self.hp += 20;
+        self.usedhp = Math.max(0,self.usedhp-20)
         return {
           state: true
         }

@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-20 21:19:58
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-28 15:14:51
+ * @LastEditTime: 2022-03-28 19:25:38
 -->
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
@@ -61,22 +61,22 @@ body{
 {
 	width: 16px;
 	height: 16px;
-	background-color: #F5F5F5;
+	background-color: #f5f5f500;
 }
  
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+	border-radius: 2px;
+	background-color: #964d1f6b;
 }
  
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb
 {
-	border-radius: 10px;
+	border-radius: 2px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+	background-color: #964d1f;
 }
 </style>

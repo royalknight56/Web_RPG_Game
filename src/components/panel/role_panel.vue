@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-21 12:49:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-25 10:42:03
+ * @LastEditTime: 2022-03-29 18:41:32
 -->
 <template>
   <div>
@@ -14,13 +14,14 @@
         <div class="panel_attr">
           <div class="panel_attr_key">HP</div>
           <div class="panel_attr_value">
-            {{ my.hp }}
+            {{ my.computedAttr.hp - my.usedhp }}
           </div>
         </div>
         <div class="panel_attr">
           <div class="panel_attr_key">MP</div>
           <div class="panel_attr_value">
-            {{ my.mp }}
+            {{ my.computedAttr.mp - my.usedmp }}
+
           </div>
         </div>
 
@@ -74,6 +75,8 @@ import itembuff from "../base/buff_ui.vue";
 let my = inject("my");
 
 let attrs_key = {
+  hp: "最大生命",
+  mp: "最大魔法",
   attack: "攻击力",
 
   defense: "防御力",

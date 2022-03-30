@@ -1,6 +1,6 @@
 /*
  * @Author: zhangweiyuan-Royal
- * @LastEditTime: 2022-03-28 15:59:06
+ * @LastEditTime: 2022-03-28 20:06:21
  * @Description: 
  */
 module.exports = {
@@ -15,6 +15,8 @@ module.exports = {
                 coc: '#9e7646',
                 cod: '#cc8254',
                 coe: '#f6efd1',
+                cof: '#fffbec',
+
                 
             }
         },

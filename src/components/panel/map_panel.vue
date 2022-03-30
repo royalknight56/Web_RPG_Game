@@ -4,7 +4,7 @@
  * @Author: RoyalKnight
  * @Date: 2021-03-25 19:43:13
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-16 11:00:08
+ * @LastEditTime: 2022-03-29 17:22:04
 -->
 <template>
   <div>
@@ -64,8 +64,9 @@ function mapTP(item) {
   if (global_my.spirit - item.spirit >= 0) {
     //判断体力是否充足
     //恢复血蓝
-    global_my.hp = global_my.maxhp;
-    global_my.mp = global_my.maxmp;
+    global_my.usedhp = 0;
+    global_my.usedmp = 0;
+    
     enemymap.splice(0); //清空怪物列表
     for (let i = 0; i < item.enemylist.length; i++) {
       enemymap.push(deepClone(enemylist[item.enemylist[i]]));
